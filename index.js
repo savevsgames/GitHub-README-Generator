@@ -15,6 +15,17 @@ colors.setTheme({
   error: "red",
 });
 
+const logo = `
+            MADE BY:
+     ____                  
+    / ___|_  __  ___  ____  
+    | |  _| '__|/ _ \ / _  | 
+    | |_| | |  |  __/ (_| | 
+    |_____|_|  |____|\___, | 
+                     ___| | 
+                     |____/ 
+                         `;
+
 // TODO: Create an array of questions for user input
 const titleQuestion = [
   {
@@ -36,38 +47,43 @@ const descriptionQuestion = [
 ];
 const installQuestion = [
   {
-    type: "input",
+    type: "editor",
     name: "projectInstallInstructions",
     message: colors.verbose(
-      "Enter Installation Instructions: \n NOTE - Detailed steps on how to install and set up the project. This should include any dependencies, configuration requirements, and troubleshooting tips. \n * - This will open an editor for you to enter instructions."
+      "Enter Installation Instructions: \n NOTE - Detailed steps on how to install and set up the project. This should include any dependencies, configuration requirements, and troubleshooting tips. \n * - This will open an editor for you to enter instructions. Enter your instructions, then save the file and close it to return to the CLI."
     ),
+    waitUserInput: true,
   },
 ];
+
 const usageQuestion = [
   {
-    type: "input",
+    type: "editor",
     name: "projectUsageInstructions",
     message: colors.verbose(
-      "Enter Usage Instructions: \n NOTE - Examples of how to use the project, including code snippets and any relevant commands. This section helps users understand how to interact with your project effectively."
+      "Enter Usage Instructions: \n NOTE - Examples of how to use the project, including code snippets and any relevant commands. This section helps users understand how to interact with your project effectively. \n * - This will open an editor for you to enter instructions. Enter your instructions, then save the file and close it to return to the CLI."
     ),
+    waitUserInput: true,
   },
 ];
 const contributionGuidelinesQuestion = [
   {
-    type: "input",
+    type: "editor",
     name: "projectContributingGuidelines",
     message: colors.verbose(
       "Enter Contributing Guidelines: \n NOTE - Instructions for how others can contribute to the project, including coding standards, pull request processes, and any other relevant guidelines."
     ),
+    waitUserInput: true,
   },
 ];
 const licenseInformationQuestion = [
   {
-    type: "input",
+    type: "list",
     name: "projectLicenseInformation",
     message: colors.verbose(
       "Enter License Information: \n NOTE - Specify the license under which the project is distributed. This informs users of their rights regarding the use and modification of the project."
     ),
+    choices: ["MIT", "Apache 2.0"],
   },
 ];
 const acknowledgementsQuestion = [
@@ -90,11 +106,12 @@ const contactQuestion = [
 ];
 const resourcesQuestion = [
   {
-    type: "input",
+    type: "editor",
     name: "projectResources",
     message: colors.verbose(
       "Enter Additional Resources: \n NOTE - Links to documentation, tutorials, or related projects that may help users further understand or utilize the project."
     ),
+    waitUserInput: true,
   },
 ];
 const badgesQuestion = [
@@ -108,32 +125,29 @@ const badgesQuestion = [
 ];
 
 function promptTitleQuestion() {
+  console.log("Welcome to Greg Barker's GitHub CLI README maker!");
+  console.log(logo);
   inquirer.prompt(titleQuestion).then((titleAnswer) => {
     const answers = {};
-
     promptDescriptionQuestion({ ...answers, ...titleAnswer });
-    console.log("promptTitleQuestion", answers);
   });
 }
 
 function promptDescriptionQuestion(answers) {
   inquirer.prompt(descriptionQuestion).then((descriptionAnswer) => {
     promptInstallQuestion({ ...answers, ...descriptionAnswer });
-    console.log("promptDescriptionQuestion", answers);
   });
 }
 
 function promptInstallQuestion(answers) {
   inquirer.prompt(installQuestion).then((installAnswer) => {
     promptUsageQuestion({ ...answers, ...installAnswer });
-    console.log("promptInstallQuestion", answers);
   });
 }
 
 function promptUsageQuestion(answers) {
   inquirer.prompt(usageQuestion).then((usageAnswer) => {
     promptContributionGuidelinesQuestion({ ...answers, ...usageAnswer });
-    console.log("promptUsageQuestion", answers);
   });
 }
 
@@ -145,7 +159,6 @@ function promptContributionGuidelinesQuestion(answers) {
         ...answers,
         ...contributionGuidelinesAnswer,
       });
-      console.log("promptContributionGuidelinesQuestion", answers);
     });
 }
 
@@ -157,28 +170,24 @@ function promptLicenseInformationQuestion(answers) {
         ...answers,
         ...licenseInformationAnswer,
       });
-      console.log("promptLicenseInformationQuestion", answers);
     });
 }
 
 function promptAcknowledgementsQuestion(answers) {
   inquirer.prompt(acknowledgementsQuestion).then((acknowledgementsAnswer) => {
     promptContactQuestion({ ...answers, ...acknowledgementsAnswer });
-    console.log("promptAcknowledgementsQuestion", answers);
   });
 }
 
 function promptContactQuestion(answers) {
   inquirer.prompt(contactQuestion).then((contactAnswer) => {
     promptResourcesQuestion({ ...answers, ...contactAnswer });
-    console.log("promptContactQuestion", answers);
   });
 }
 
 function promptResourcesQuestion(answers) {
   inquirer.prompt(resourcesQuestion).then((resourcesAnswer) => {
     promptBadgesQuestion({ ...answers, ...resourcesAnswer });
-    console.log("promptResourcesQuestion", answers);
   });
 }
 
