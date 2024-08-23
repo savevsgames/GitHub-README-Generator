@@ -10,6 +10,8 @@
   "author": "Greg Barker",
   "license": "ISC",
   "dependencies": {
-    "inquirer": "8.2.4"
+    "colors": "^1.4.0",
+    "inquirer": "^8.2.4",
+    "underscore": "^1.13.7"
   }
 }
