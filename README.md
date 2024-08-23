@@ -117,6 +117,8 @@ You are required to submit the following for review:
 - The URL of the GitHub repository, with a unique name and a README describing the project
 
 ---
+![Description of SVG](https://raw.githubusercontent.com/username/repo/branch/path/to/image.svg)
+```
 
-# GitHub-README-Generator
+
 # GitHub-README-Generator

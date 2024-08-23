@@ -1,6 +1,8 @@
 // TODO: Include packages needed for this application
 import colors from "colors";
 import inquirer from "inquirer";
+import fs from "fs";
+import renderBadge from "./utils/renderBadge.js";
 
 colors.setTheme({
   silly: "rainbow",
@@ -26,12 +28,12 @@ const logo = `
                      |____/ 
                          `;
 
-// TODO: Create an array of questions for user input
+// Questions for User Input
 const titleQuestion = [
   {
     type: "input",
     name: "projectTitle",
-    message: colors.verbose(
+    message: colors.info(
       "Enter Project Title: \n NOTE - The title of your project should be clear and descriptive, giving readers an immediate understanding of what the project is about."
     ),
   },
@@ -40,7 +42,7 @@ const descriptionQuestion = [
   {
     type: "input",
     name: "projectDescription",
-    message: colors.verbose(
+    message: colors.info(
       "Enter Project Description: \n NOTE - A brief overview of the project, explaining its purpose, features, and what problems it solves. This section should engage readers and provide context."
     ),
   },
@@ -49,7 +51,7 @@ const installQuestion = [
   {
     type: "editor",
     name: "projectInstallInstructions",
-    message: colors.verbose(
+    message: colors.info(
       "Enter Installation Instructions: \n NOTE - Detailed steps on how to install and set up the project. This should include any dependencies, configuration requirements, and troubleshooting tips. \n * - This will open an editor for you to enter instructions. Enter your instructions, then save the file and close it to return to the CLI."
     ),
     waitUserInput: true,
@@ -60,7 +62,7 @@ const usageQuestion = [
   {
     type: "editor",
     name: "projectUsageInstructions",
-    message: colors.verbose(
+    message: colors.info(
       "Enter Usage Instructions: \n NOTE - Examples of how to use the project, including code snippets and any relevant commands. This section helps users understand how to interact with your project effectively. \n * - This will open an editor for you to enter instructions. Enter your instructions, then save the file and close it to return to the CLI."
     ),
     waitUserInput: true,
@@ -70,7 +72,7 @@ const contributionGuidelinesQuestion = [
   {
     type: "editor",
     name: "projectContributingGuidelines",
-    message: colors.verbose(
+    message: colors.info(
       "Enter Contributing Guidelines: \n NOTE - Instructions for how others can contribute to the project, including coding standards, pull request processes, and any other relevant guidelines."
     ),
     waitUserInput: true,
@@ -80,7 +82,7 @@ const licenseInformationQuestion = [
   {
     type: "list",
     name: "projectLicenseInformation",
-    message: colors.verbose(
+    message: colors.info(
       "Enter License Information: \n NOTE - Specify the license under which the project is distributed. This informs users of their rights regarding the use and modification of the project."
     ),
     choices: ["MIT", "Apache 2.0"],
@@ -90,7 +92,7 @@ const acknowledgementsQuestion = [
   {
     type: "input",
     name: "projectAcknowledgments",
-    message: colors.verbose(
+    message: colors.info(
       "Enter Credits and Acknowledgments: \n NOTE - Recognition of contributors, libraries, or resources that were instrumental in the project’s development."
     ),
   },
@@ -99,7 +101,7 @@ const contactQuestion = [
   {
     type: "input",
     name: "projectContact",
-    message: colors.verbose(
+    message: colors.info(
       "Enter Contact Information: \n NOTE - Provide details on how users can reach out for support or questions, such as an email address or links to social media."
     ),
   },
@@ -108,7 +110,7 @@ const resourcesQuestion = [
   {
     type: "editor",
     name: "projectResources",
-    message: colors.verbose(
+    message: colors.info(
       "Enter Additional Resources: \n NOTE - Links to documentation, tutorials, or related projects that may help users further understand or utilize the project."
     ),
     waitUserInput: true,
@@ -117,16 +119,75 @@ const resourcesQuestion = [
 const badgesQuestion = [
   {
     type: "input",
-    name: "projectBadges",
-    message: colors.verbose(
-      "Enter Badges: \n NOTE - Include badges for build status, coverage, or other metrics that provide quick insights into the project's health and activity."
-    ),
+    name: "label",
+    message: colors.info("Enter badge label text"),
+    default: "BADGE",
+  },
+  {
+    type: "input",
+    name: "message",
+    message: colors.info("Enter badge message"),
+    default: "Message",
+  },
+  {
+    type: "list",
+    name: "labelColor",
+    message: colors.info("Pick LABEL background color."),
+    choices: [
+      "brightgreen",
+      "green",
+      "yellow",
+      "yellowgreen",
+      "orange",
+      "red",
+      "blue",
+      "grey",
+      "lightgrey",
+      "gray",
+      "lightgray",
+      "critical",
+      "important",
+      "success",
+      "informational",
+      "inactive",
+    ],
+    default: "blue",
+  },
+  {
+    type: "list",
+    name: "color",
+    message: colors.info("Pick MESSAGE background color."),
+    choices: [
+      "brightgreen",
+      "green",
+      "yellow",
+      "yellowgreen",
+      "orange",
+      "red",
+      "blue",
+      "grey",
+      "lightgrey",
+      "gray",
+      "lightgray",
+      "critical",
+      "important",
+      "success",
+      "informational",
+      "inactive",
+    ],
+    default: "white",
+  },
+  {
+    type: "list",
+    name: "style",
+    message: colors.info("Choose a badge style:"),
+    choices: ["plastic", "flat", "flat-square", "for-the-badge", "social"],
+    default: "flat",
   },
 ];
 
+// Functions - prompt the user and then trigger the next questions
 function promptTitleQuestion() {
-  console.log("Welcome to Greg Barker's GitHub CLI README maker!");
-  console.log(logo);
   inquirer.prompt(titleQuestion).then((titleAnswer) => {
     const answers = {};
     promptDescriptionQuestion({ ...answers, ...titleAnswer });
@@ -192,30 +253,31 @@ function promptResourcesQuestion(answers) {
 }
 
 function promptBadgesQuestion(answers) {
-  inquirer.prompt(badgesQuestion).then((badgesAnswer) => {
-    const finalAnswers = { ...answers, ...badgesAnswer };
-    console.log("FINAL", finalAnswers);
+  inquirer.prompt(badgesQuestion).then((badgesAnswers) => {
+    console.log(badgesAnswers);
+    const newBadge = renderBadge(badgesAnswers);
+    // console.log(newBadge);
+    // Do something with the newBadge Object and ...answers
+    writeToFile("badge.svg", newBadge);
+    const finalAnswers = { ...answers };
+    document.getElementById("badge").innerHTML = finalAnswers;
+    writeToFile("README.md", finalAnswers);
   });
 }
 
-promptTitleQuestion();
-
-// projectTitle
-// projectDescription
-// projectInstallInstructions
-// projectUsageInstructions
-// projectContributingGuidelines
-// projectLicenseInformation
-// projectAcknowledgments
-// projectContact
-// projectResources
-// projectBadges
-
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+// Function to write README file
+function writeToFile(fileName, data) {
+  fs.writeFile(`./output/${fileName}`, JSON.stringify(data), () => {
+    console.log("File Created Successfully!");
+  });
+}
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+  console.log("Welcome to Greg Barker's GitHub CLI README maker!");
+  console.log(logo.rainbow);
+  promptTitleQuestion();
+}
 
 // Function call to initialize app
 init();
