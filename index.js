@@ -36,7 +36,7 @@ const descriptionQuestion = [
 ];
 const installQuestion = [
   {
-    type: "editor",
+    type: "input",
     name: "projectInstallInstructions",
     message: colors.verbose(
       "Enter Installation Instructions: \n NOTE - Detailed steps on how to install and set up the project. This should include any dependencies, configuration requirements, and troubleshooting tips. \n * - This will open an editor for you to enter instructions."
@@ -109,17 +109,86 @@ const badgesQuestion = [
 
 function promptTitleQuestion() {
   inquirer.prompt(titleQuestion).then((titleAnswer) => {
-    console.log(colors.debug(titleAnswer));
-    promptTitleDescription(titleAnswer);
+    const answers = {};
+
+    promptDescriptionQuestion({ ...answers, ...titleAnswer });
+    console.log("promptTitleQuestion", answers);
   });
 }
 
-function promptTitleDescription(...answers) {
+function promptDescriptionQuestion(answers) {
   inquirer.prompt(descriptionQuestion).then((descriptionAnswer) => {
-    answers.push(descriptionAnswer);
-    console.log(colors.debug(answers));
+    promptInstallQuestion({ ...answers, ...descriptionAnswer });
+    console.log("promptDescriptionQuestion", answers);
   });
 }
+
+function promptInstallQuestion(answers) {
+  inquirer.prompt(installQuestion).then((installAnswer) => {
+    promptUsageQuestion({ ...answers, ...installAnswer });
+    console.log("promptInstallQuestion", answers);
+  });
+}
+
+function promptUsageQuestion(answers) {
+  inquirer.prompt(usageQuestion).then((usageAnswer) => {
+    promptContributionGuidelinesQuestion({ ...answers, ...usageAnswer });
+    console.log("promptUsageQuestion", answers);
+  });
+}
+
+function promptContributionGuidelinesQuestion(answers) {
+  inquirer
+    .prompt(contributionGuidelinesQuestion)
+    .then((contributionGuidelinesAnswer) => {
+      promptLicenseInformationQuestion({
+        ...answers,
+        ...contributionGuidelinesAnswer,
+      });
+      console.log("promptContributionGuidelinesQuestion", answers);
+    });
+}
+
+function promptLicenseInformationQuestion(answers) {
+  inquirer
+    .prompt(licenseInformationQuestion)
+    .then((licenseInformationAnswer) => {
+      promptAcknowledgementsQuestion({
+        ...answers,
+        ...licenseInformationAnswer,
+      });
+      console.log("promptLicenseInformationQuestion", answers);
+    });
+}
+
+function promptAcknowledgementsQuestion(answers) {
+  inquirer.prompt(acknowledgementsQuestion).then((acknowledgementsAnswer) => {
+    promptContactQuestion({ ...answers, ...acknowledgementsAnswer });
+    console.log("promptAcknowledgementsQuestion", answers);
+  });
+}
+
+function promptContactQuestion(answers) {
+  inquirer.prompt(contactQuestion).then((contactAnswer) => {
+    promptResourcesQuestion({ ...answers, ...contactAnswer });
+    console.log("promptContactQuestion", answers);
+  });
+}
+
+function promptResourcesQuestion(answers) {
+  inquirer.prompt(resourcesQuestion).then((resourcesAnswer) => {
+    promptBadgesQuestion({ ...answers, ...resourcesAnswer });
+    console.log("promptResourcesQuestion", answers);
+  });
+}
+
+function promptBadgesQuestion(answers) {
+  inquirer.prompt(badgesQuestion).then((badgesAnswer) => {
+    const finalAnswers = { ...answers, ...badgesAnswer };
+    console.log("FINAL", finalAnswers);
+  });
+}
+
 promptTitleQuestion();
 
 // projectTitle
