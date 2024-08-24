@@ -3,6 +3,7 @@ import colors from "colors";
 import inquirer from "inquirer";
 import fs from "fs";
 import renderBadge from "./utils/renderBadge.js";
+import renderLicenseBadge from "./utils/generateMarkdown.js";
 
 colors.setTheme({
   silly: "rainbow",
@@ -85,7 +86,21 @@ const licenseInformationQuestion = [
     message: colors.info(
       "Enter License Information: \n NOTE - Specify the license under which the project is distributed. This informs users of their rights regarding the use and modification of the project."
     ),
-    choices: ["MIT", "Apache 2.0"],
+    choices: [
+      "Apache License 2.0",
+      "GNU General Public License v3.0",
+      "MIT License",
+      'BSD 2-Clause "Simplified" License',
+      'BSD 3-Clause "New" or "Revised" License',
+      "Boost Software License 1.0",
+      "Creative Commons Zero v1.0 Universal",
+      "Eclipse Public License 2.0",
+      "GNU Affero General Public License v3.0",
+      "GNU General Public License v2.0",
+      "GNU Lesser General Public License v2.1",
+      "Mozilla Public License 2.0",
+      "The Unlicense",
+    ],
   },
 ];
 const acknowledgementsQuestion = [
@@ -227,6 +242,7 @@ function promptLicenseInformationQuestion(answers) {
   inquirer
     .prompt(licenseInformationQuestion)
     .then((licenseInformationAnswer) => {
+      renderLicenseBadge(licenseInformationAnswer);
       promptAcknowledgementsQuestion({
         ...answers,
         ...licenseInformationAnswer,

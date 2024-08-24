@@ -13,38 +13,19 @@ function renderBadge(config) {
   };
   try {
     const badge = makeBadge(format);
-    const editedBadge = JSON.stringify(mapValidCharacters(badge));
+    const editedBadge = JSON.stringify(badge);
     return JSON.parse(editedBadge);
   } catch (e) {
-    console.log("ValidationError: Field `message` is required", e); //
+    console.log(ValidationError, e); //
   }
 
-  function removeLineBreaks(svgString) {
-    return svgString
-      .replace(/\n/g, "")
-      .replace(/\r/g, "")
-      .replace(/\s+/g, " ")
-      .trim();
-  }
-
-  function mapValidCharacters(inputStr) {
-    // Define the set of valid characters that CAN be used in the svg
-    const validChars =
-      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>,./?;:'\"[]{}|`~!@#$%^&*()-_=+ ";
-
-    // Initialize an empty string to store the mapped result
-    let mappedStr = "";
-
-    // Iterate over each character in the input string
-    for (let char of inputStr) {
-      // If the character is in the set of valid characters, add it to the mapped string
-      if (validChars.includes(char)) {
-        mappedStr += char;
-      }
-    }
-
-    return mappedStr;
-  }
+  // function removeLineBreaks(svgString) {
+  //   return svgString
+  //     .replace(/\n/g, "")
+  //     .replace(/\r/g, "")
+  //     .replace(/\s+/g, " ")
+  //     .trim();
+  // }
 }
 
 export default renderBadge;
