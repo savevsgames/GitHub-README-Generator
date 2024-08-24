@@ -43,73 +43,100 @@ function renderProjectBadgeLink(badge_alt) {
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
 function renderLicenseLink(license) {
-  const link = "./LICENSE.md";
+  const link = "./../LICENSE";
   const linkTitle = license;
   return `[${linkTitle}](${link})`;
 }
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
-function renderLicenseSection(license) {}
+function renderLicenseSection(license) {
+  return `LICENSE INFO: This repository is covered under ${license}.`;
+}
 
 // TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
-  const projectBadgeSvgLink = renderProjectBadgeLink(data.projectTitle);
-  const licenseLink = renderLicenseLink(data.projectLicenseInformation);
-  const licenseBadge = renderLicenseBadge(data.projectLicenseInformation);
+function generateMarkdown() {
+  const data = readFile("README_OBJ.json", "utf8", (error) => {
+    if (error) {
+      console.error(error);
+    } else {
+      console.log("File read ruccessfully!");
+    }
+  });
+  // Clean the data object properties
+  const cleanedData = {
+    projectTitle: data.projectTitle.trim(),
+    projectDescription: data.projectDescription.trim(),
+    projectInstallInstructions: data.projectInstallInstructions.trim(),
+    projectUsageInstructions: data.projectUsageInstructions.trim(),
+    projectContributingGuidelines: data.projectContributingGuidelines.trim(),
+    projectLicenseInformation: data.projectLicenseInformation.trim(),
+    projectAcknowledgments: data.projectAcknowledgments.trim(),
+    projectContact: data.projectContact.trim(),
+    projectResources: data.projectResources.trim(),
+  };
+  const projectBadgeSvgLink = renderProjectBadgeLink(cleanedData.projectTitle);
+  const licenseLink = renderLicenseLink(cleanedData.projectLicenseInformation);
+  const licenseBadge = renderLicenseBadge(
+    cleanedData.projectLicenseInformation
+  );
+  const licenseInfo = renderLicenseSection(
+    cleanedData.projectLicenseInformation
+  );
   return `
-# ${data.projectTitle}
+# ${cleanedData.projectTitle}
 ## ${projectBadgeSvgLink}
 
 ## Description
 
-${data.projectDescription}
+${cleanedData.projectDescription}
 
 ---
 
 ## Installation Instructions
 
-${data.projectInstallInstructions}
+${cleanedData.projectInstallInstructions}
 
 ---
 
 ## Usage Instructions
 
-${data.projectUsageInstructions}
+${cleanedData.projectUsageInstructions}
 
 ---
 
 ## Contributing Guidelines
 
-${data.projectContributingGuidelines}
+${cleanedData.projectContributingGuidelines}
 
 ---
 
 ## License Information
 
-${data.projectLicenseInformation}
+${cleanedData.projectLicenseInformation}
 ${licenseBadge} ${licenseLink}
-
+### ${licenseInfo}
+ 
 ---
 
 ## Acknowledgments
 
-${data.projectAcknowledgments}
+${cleanedData.projectAcknowledgments}
 
 ---
 
 ## Contact
 
-${data.projectContact}
+${cleanedData.projectContact}
 
 ---
 
 ## Resources
 
-${data.projectResources}
+${cleanedData.projectResources}
 
 ---
-`;
+`.trim(); // in case there is any other whitespace
 }
 
 export default {

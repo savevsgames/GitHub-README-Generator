@@ -2,7 +2,6 @@
 import colors from "colors";
 import inquirer from "inquirer";
 import fs from "fs";
-import renderBadge from "./utils/renderBadge.js";
 import utils from "./utils/generateMarkdown.js";
 
 colors.setTheme({
@@ -30,7 +29,7 @@ const logo = `
                          `;
 
 // Questions for User Input
-const titleQuestion = [
+const questions = [
   {
     type: "input",
     name: "projectTitle",
@@ -47,8 +46,7 @@ const titleQuestion = [
       }
     },
   },
-];
-const descriptionQuestion = [
+
   {
     type: "input",
     name: "projectDescription",
@@ -57,8 +55,7 @@ const descriptionQuestion = [
     ),
     waitUserInput: true,
   },
-];
-const installQuestion = [
+
   {
     type: "input",
     name: "projectInstallInstructions",
@@ -67,9 +64,7 @@ const installQuestion = [
     ),
     waitUserInput: true,
   },
-];
 
-const usageQuestion = [
   {
     type: "input",
     name: "projectUsageInstructions",
@@ -78,8 +73,7 @@ const usageQuestion = [
     ),
     waitUserInput: true,
   },
-];
-const contributionGuidelinesQuestion = [
+
   {
     type: "input",
     name: "projectContributingGuidelines",
@@ -88,8 +82,7 @@ const contributionGuidelinesQuestion = [
     ),
     waitUserInput: true,
   },
-];
-const licenseInformationQuestion = [
+
   {
     type: "list",
     name: "projectLicenseInformation",
@@ -113,8 +106,7 @@ const licenseInformationQuestion = [
     ],
     waitUserInput: true,
   },
-];
-const acknowledgementsQuestion = [
+
   {
     type: "input",
     name: "projectAcknowledgments",
@@ -123,8 +115,7 @@ const acknowledgementsQuestion = [
     ),
     waitUserInput: true,
   },
-];
-const contactQuestion = [
+
   {
     type: "input",
     name: "projectContact",
@@ -133,8 +124,7 @@ const contactQuestion = [
     ),
     waitUserInput: true,
   },
-];
-const resourcesQuestion = [
+
   {
     type: "input",
     name: "projectResources",
@@ -144,161 +134,6 @@ const resourcesQuestion = [
     waitUserInput: true,
   },
 ];
-const badgesQuestion = [
-  {
-    type: "input",
-    name: "label",
-    message: colors.info("Enter badge label text"),
-    default: "BADGE",
-  },
-  {
-    type: "input",
-    name: "message",
-    message: colors.info("Enter badge message"),
-    default: "Message",
-  },
-  {
-    type: "list",
-    name: "labelColor",
-    message: colors.info("Pick LABEL background color."),
-    choices: [
-      "brightgreen",
-      "green",
-      "yellow",
-      "yellowgreen",
-      "orange",
-      "red",
-      "blue",
-      "grey",
-      "lightgrey",
-      "gray",
-      "lightgray",
-      "critical",
-      "important",
-      "success",
-      "informational",
-      "inactive",
-    ],
-    default: "blue",
-  },
-  {
-    type: "list",
-    name: "color",
-    message: colors.info("Pick MESSAGE background color."),
-    choices: [
-      "brightgreen",
-      "green",
-      "yellow",
-      "yellowgreen",
-      "orange",
-      "red",
-      "blue",
-      "grey",
-      "lightgrey",
-      "gray",
-      "lightgray",
-      "critical",
-      "important",
-      "success",
-      "informational",
-      "inactive",
-    ],
-    default: "white",
-  },
-  {
-    type: "list",
-    name: "style",
-    message: colors.info("Choose a badge style:"),
-    choices: ["plastic", "flat", "flat-square", "for-the-badge", "social"],
-    default: "flat",
-  },
-];
-
-// Functions - prompt the user and then trigger the next questions
-function promptTitleQuestion() {
-  inquirer.prompt(titleQuestion).then((titleAnswer) => {
-    const answers = {};
-    promptDescriptionQuestion({ ...answers, ...titleAnswer });
-  });
-}
-
-function promptDescriptionQuestion(answers) {
-  inquirer.prompt(descriptionQuestion).then((descriptionAnswer) => {
-    promptInstallQuestion({ ...answers, ...descriptionAnswer });
-  });
-}
-
-function promptInstallQuestion(answers) {
-  inquirer.prompt(installQuestion).then((installAnswer) => {
-    promptUsageQuestion({ ...answers, ...installAnswer });
-  });
-}
-
-function promptUsageQuestion(answers) {
-  inquirer.prompt(usageQuestion).then((usageAnswer) => {
-    promptContributionGuidelinesQuestion({ ...answers, ...usageAnswer });
-  });
-}
-
-function promptContributionGuidelinesQuestion(answers) {
-  inquirer
-    .prompt(contributionGuidelinesQuestion)
-    .then((contributionGuidelinesAnswer) => {
-      promptLicenseInformationQuestion({
-        ...answers,
-        ...contributionGuidelinesAnswer,
-      });
-    });
-}
-
-function promptLicenseInformationQuestion(answers) {
-  inquirer
-    .prompt(licenseInformationQuestion)
-    .then((licenseInformationAnswer) => {
-      promptAcknowledgementsQuestion({
-        ...answers,
-        ...licenseInformationAnswer,
-      });
-    });
-}
-
-function promptAcknowledgementsQuestion(answers) {
-  inquirer.prompt(acknowledgementsQuestion).then((acknowledgementsAnswer) => {
-    promptContactQuestion({ ...answers, ...acknowledgementsAnswer });
-  });
-}
-
-function promptContactQuestion(answers) {
-  inquirer.prompt(contactQuestion).then((contactAnswer) => {
-    promptResourcesQuestion({ ...answers, ...contactAnswer });
-  });
-}
-
-function promptResourcesQuestion(answers) {
-  inquirer.prompt(resourcesQuestion).then((resourcesAnswer) => {
-    promptBadgesQuestion({ ...answers, ...resourcesAnswer });
-  });
-}
-
-function promptBadgesQuestion(answers) {
-  inquirer.prompt(badgesQuestion).then((badgesAnswers) => {
-    console.log(badgesAnswers);
-    const newBadge = renderBadge(badgesAnswers);
-    // console.log(newBadge);
-    // Do something with the newBadge Object and ...answers
-    writeToFile("project_badge.svg", newBadge);
-
-    const finalAnswers = { ...answers };
-    // Last Question - Write to JSON to test
-    writeToFile("README_OBJ.json", finalAnswers);
-    // Generate Markdown
-    const markdown = utils.generateMarkdown(finalAnswers);
-    // .replace(/\\n/g, "\n") // Replace \n with actual newlines
-    // .replace(/\\/g, ""); // Remove any remaining backslashes
-    console.log("Markdown: ", typeof markdown, markdown);
-    writeToFile("README.txt", markdown);
-  });
-}
 
 // Function to write README file
 function writeToFile(fileName, data) {
@@ -325,7 +160,7 @@ function writeToFile(fileName, data) {
 function init() {
   console.log("Welcome to Greg Barker's GitHub CLI README maker!");
   console.log(logo.rainbow);
-  promptTitleQuestion();
+  inquirer.prompt(questions);
 }
 
 // Function call to initialize app

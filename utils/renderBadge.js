@@ -20,14 +20,6 @@ function renderBadge(config) {
   } catch (e) {
     console.log(ValidationError, e); //
   }
-
-  // function removeLineBreaks(svgString) {
-  //   return svgString
-  //     .replace(/\n/g, "")
-  //     .replace(/\r/g, "")
-  //     .replace(/\s+/g, " ")
-  //     .trim();
-  // }
 }
 
 export default renderBadge;
