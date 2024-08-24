@@ -4,6 +4,8 @@ import inquirer from "inquirer";
 import fs from "fs";
 import renderBadge from "./utils/renderBadge.js";
 import renderLicenseBadge from "./utils/generateMarkdown.js";
+import renderProjectBadgeLink from "./utils/generateMarkdown.js";
+import generateMarkdown from "./utils/generateMarkdown.js";
 
 colors.setTheme({
   silly: "rainbow",
@@ -274,10 +276,14 @@ function promptBadgesQuestion(answers) {
     const newBadge = renderBadge(badgesAnswers);
     // console.log(newBadge);
     // Do something with the newBadge Object and ...answers
-    writeToFile("badge.svg", newBadge);
+    writeToFile("project_badge.svg", newBadge);
+
     const finalAnswers = { ...answers };
-    document.getElementById("badge").innerHTML = finalAnswers;
-    writeToFile("README.md", finalAnswers);
+    // Last Question - Write to JSON to test
+    writeToFile("README_OBJ.json", finalAnswers);
+    // Generate Markdown
+    const markdown = generateMarkdown(finalAnswers);
+    writeToFile("README.md", markdown);
   });
 }
 

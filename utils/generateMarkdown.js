@@ -19,10 +19,18 @@ function renderLicenseBadge(license) {
   }
 }
 
+function renderProjectBadgeLink(badge_alt) {
+  const link = "../output/project_badge.svg";
+  const badgeAlt = badge_alt;
+  return `![${badgeAlt}](${link})`;
+}
+
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
 function renderLicenseLink(license) {
   const link = "./LICENSE.md";
+  const linkTitle = license;
+  return `[${linkTitle}](${link})`;
 }
 
 // TODO: Create a function that returns the license section of README
@@ -31,8 +39,11 @@ function renderLicenseSection(license) {}
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
+  const projectBadgeSvgLink = renderProjectBadgeLink(data.projectLinkTitle);
   return `# ${data.titleAnswer}
 
+  ${projectBadgeSvgLink}
+  
 `;
 }
 
@@ -41,4 +52,5 @@ export default {
   renderLicenseSection,
   renderLicenseLink,
   renderLicenseBadge,
+  renderProjectBadgeLink,
 };
