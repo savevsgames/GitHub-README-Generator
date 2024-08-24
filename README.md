@@ -46,22 +46,32 @@ Contributions to the GitHub README Generator are welcome! Please follow these st
 
 ## License Information
 
-###MIT License
+### MIT License
 
-[MIT License](./../LICENSE) LICENSE INFO: This repository is covered under MIT License.
+[MIT License](./LICENSE) LICENSE INFO: This repository is covered under MIT License.
 
 ## Acknowledgments
 
-- Inquirer.js for providing the interactive command-line user interface.
-- The open-source community for inspiration and best practices in README creation.
+I would like to extend my heartfelt thanks to the following:
+
+- **Open Source Community**: For fostering collaboration and innovation, enabling developers around the world to build upon each other's work and create amazing software.
+
+- **Node.js**: For providing a powerful and efficient runtime environment that allows JavaScript to be used on the server side, making it easier to build scalable network applications.
+
+- **Inquirer**: For simplifying the process of gathering user input in CLI applications, making it a breeze to create interactive command-line interfaces.
+
+- **Colors**: For adding a splash of color to the console, making the output more visually appealing and user-friendly.
+
+- **ECMA-262**: For defining the standard that brings us JavaScript! Without it, we’d be lost in a world of syntax chaos. Remember, in the realm of programming languages, it’s not just about what you code, but how you adhere to the rules of engagement!
+
+Thank you to all the contributors and maintainers of these incredible projects. Your hard work and dedication inspire developers everywhere!
 
 ## Questions
 
 [savevsgames](https://github.com/savevsgames)
 gregcbarker@gmail.com
-For questions or support, please contact:
-- GitHub: [@savevsgames](https://github.com/savevsgames)
-- Email: [your-email@example.com]
+
+### For questions or support, please create an issue.
 
 ## Resources
 

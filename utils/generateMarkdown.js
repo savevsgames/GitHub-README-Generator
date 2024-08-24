@@ -146,7 +146,7 @@ ${cleanedData.projectAcknowledgments}
 ${githubProfile}
 ${cleanedData.projectContactEmail}
 
-### ${additionalQuestions}
+${additionalQuestions}
 
 ## Resources
 
