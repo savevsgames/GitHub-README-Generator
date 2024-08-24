@@ -132,6 +132,8 @@ ${licenseBadge}
 
 ${cleanedData.projectDescription}
 
+![Readme Generator Screenshot](./assets/images/readme_generator_screenshot.png)
+
 ## Installation Instructions
 
 ${cleanedData.projectInstallInstructions}
