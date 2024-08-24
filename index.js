@@ -1,8 +1,9 @@
 // TODO: Include packages needed for this application
 import colors from "colors";
 import inquirer from "inquirer";
-import fs from "fs";
+import { promises as fs } from "fs";
 import utils from "./utils/generateMarkdown.js";
+import generateMarkdown from "./utils/generateMarkdown.js";
 
 colors.setTheme({
   silly: "rainbow",
@@ -118,9 +119,23 @@ const questions = [
 
   {
     type: "input",
-    name: "projectContact",
+    name: "projectContactGithub",
+    message: colors.info("Enter your GitHub username: "),
+    waitUserInput: true,
+  },
+
+  {
+    type: "input",
+    name: "projectContactEmail",
+    message: colors.info("Enter your email: "),
+    waitUserInput: true,
+  },
+
+  {
+    type: "input",
+    name: "projectContactAdditional",
     message: colors.info(
-      "Enter Contact Information: \n NOTE - Provide details on how users can reach out for support or questions, such as an email address or links to social media."
+      "Enter instructions for users who wish to ask you questions: "
     ),
     waitUserInput: true,
   },
@@ -134,6 +149,20 @@ const questions = [
     waitUserInput: true,
   },
 ];
+
+// Function to prompt users with questionaire
+function promptQuestions() {
+  return new Promise((resolve, reject) => {
+    inquirer
+      .prompt(questions)
+      .then((answers) => {
+        resolve(answers); // Resolve the promise with user input
+      })
+      .catch((error) => {
+        reject(error); // Reject if user does not complete
+      });
+  });
+}
 
 // Function to write README file
 function writeToFile(fileName, data) {
@@ -156,11 +185,23 @@ function writeToFile(fileName, data) {
   }
 }
 
+async function asyncQuestionaire() {
+  try {
+    const questionaireResponses = await promptQuestions();
+    const markdown = generateMarkdown(questionaireResponses);
+    console.log("Markdown created successfully:", markdown);
+    writeToFile("README.md", markdown);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 // TODO: Create a function to initialize app
 function init() {
   console.log("Welcome to Greg Barker's GitHub CLI README maker!");
   console.log(logo.rainbow);
-  inquirer.prompt(questions);
+  // call function to prompt user
+  asyncQuestionaire();
 }
 
 // Function call to initialize app

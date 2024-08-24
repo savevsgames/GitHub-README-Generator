@@ -34,35 +34,54 @@ function renderLicenseBadge(license) {
   }
 }
 
-function renderProjectBadgeLink(badge_alt) {
-  const link = "../output/project_badge.svg";
-  const badgeAlt = badge_alt;
-  return `![${badgeAlt}](${link})`;
-}
-
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
 function renderLicenseLink(license) {
-  const link = "./../LICENSE";
-  const linkTitle = license;
-  return `[${linkTitle}](${link})`;
+  let link = "";
+  if (!license) {
+    return "";
+  } else {
+    link = "./../LICENSE";
+    const linkTitle = license;
+    return `[${linkTitle}](${link})`;
+  }
+}
+
+// Function that returns any additional info for users asking questions
+// If there is no info, return an empty string
+function renderAdditionalQuestions(info) {
+  if (!info) {
+    return "";
+  } else {
+    return info;
+  }
+}
+
+// Function that returns the github profile link
+// If there is no profile, return an empty string
+function renderGithubProfileLink(profile) {
+  let link = "";
+  if (!profile) {
+    return "";
+  } else {
+    link = "./../LICENSE";
+    const linkTitle = profile;
+    return `[${linkTitle}](${link})`;
+  }
 }
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
 function renderLicenseSection(license) {
-  return `LICENSE INFO: This repository is covered under ${license}.`;
+  if (license) {
+    return `LICENSE INFO: This repository is covered under ${license}.`;
+  } else {
+    return "LICENSE INFO: This repository has no specified license.";
+  }
 }
 
 // TODO: Create a function to generate markdown for README
-function generateMarkdown() {
-  const data = readFile("README_OBJ.json", "utf8", (error) => {
-    if (error) {
-      console.error(error);
-    } else {
-      console.log("File read ruccessfully!");
-    }
-  });
+function generateMarkdown(data) {
   // Clean the data object properties
   const cleanedData = {
     projectTitle: data.projectTitle.trim(),
@@ -72,10 +91,12 @@ function generateMarkdown() {
     projectContributingGuidelines: data.projectContributingGuidelines.trim(),
     projectLicenseInformation: data.projectLicenseInformation.trim(),
     projectAcknowledgments: data.projectAcknowledgments.trim(),
-    projectContact: data.projectContact.trim(),
+    projectContactGithub: data.projectContactGithub.trim(),
+    projectContactEmail: data.projectContactEmail.trim(),
+    projectContactAdditional: data.projectContactAdditional.trim(),
     projectResources: data.projectResources.trim(),
   };
-  const projectBadgeSvgLink = renderProjectBadgeLink(cleanedData.projectTitle);
+
   const licenseLink = renderLicenseLink(cleanedData.projectLicenseInformation);
   const licenseBadge = renderLicenseBadge(
     cleanedData.projectLicenseInformation
@@ -83,9 +104,15 @@ function generateMarkdown() {
   const licenseInfo = renderLicenseSection(
     cleanedData.projectLicenseInformation
   );
+  const githubProfile = renderGithubProfileLink(
+    cleanedData.projectContactGithub
+  );
+  const additionalQuestions = renderAdditionalQuestions(
+    cleanedData.projectContactAdditional
+  );
   return `
 # ${cleanedData.projectTitle}
-## ${projectBadgeSvgLink}
+${licenseBadge}
 
 ## Description
 
@@ -113,9 +140,8 @@ ${cleanedData.projectContributingGuidelines}
 
 ## License Information
 
-${cleanedData.projectLicenseInformation}
-${licenseBadge} ${licenseLink}
-### ${licenseInfo}
+###${cleanedData.projectLicenseInformation}
+${licenseLink} ${licenseInfo}
  
 ---
 
@@ -125,9 +151,11 @@ ${cleanedData.projectAcknowledgments}
 
 ---
 
-## Contact
+## Questions
+${githubProfile}
+${cleanedData.projectContactEmail}
+}
 
-${cleanedData.projectContact}
 
 ---
 
@@ -141,8 +169,4 @@ ${cleanedData.projectResources}
 
 export default {
   generateMarkdown,
-  renderLicenseSection,
-  renderLicenseLink,
-  renderLicenseBadge,
-  renderProjectBadgeLink,
 };
