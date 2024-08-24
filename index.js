@@ -42,7 +42,6 @@ const questions = [
       if (userInput) {
         return true;
       } else {
-        console.log("You must enter a project title.");
         return false;
       }
     },
@@ -156,41 +155,27 @@ function promptQuestions() {
     inquirer
       .prompt(questions)
       .then((answers) => {
-        resolve(answers); // Resolve the promise with user input
+        resolve(answers); // Resolve the promise by completing user input
       })
       .catch((error) => {
+        console.error(error);
         reject(error); // Reject if user does not complete
       });
   });
 }
 
 // Function to write README file
-function writeToFile(fileName, data) {
-  if (typeof data === String) {
-    fs.writeFile(`./output/${fileName}`, data, (error) => {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log(typeof data, fileName, "File Created Successfully!");
-      }
-    });
-  } else {
-    fs.writeFile(`./output/${fileName}`, JSON.stringify(data), (error) => {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log(typeof data, fileName, "File Created Successfully!");
-      }
-    });
-  }
+async function writeToFile(fileName, data) {
+  await fs.writeFile(fileName, data);
+  return "File written Successfully!";
 }
-
+// async function to handle prompt promise
 async function asyncQuestionaire() {
   try {
     const questionaireResponses = await promptQuestions();
-    const markdown = generateMarkdown(questionaireResponses);
+    const markdown = utils.generateMarkdown(questionaireResponses);
+    await writeToFile("./output/README.md", markdown);
     console.log("Markdown created successfully:", markdown);
-    writeToFile("README.md", markdown);
   } catch (error) {
     console.error(error);
   }

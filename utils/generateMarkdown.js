@@ -64,7 +64,7 @@ function renderGithubProfileLink(profile) {
   if (!profile) {
     return "";
   } else {
-    link = "./../LICENSE";
+    link = `https://github.com/${profile}`;
     const linkTitle = profile;
     return `[${linkTitle}](${link})`;
   }
@@ -112,58 +112,45 @@ function generateMarkdown(data) {
   );
   return `
 # ${cleanedData.projectTitle}
+
 ${licenseBadge}
 
 ## Description
 
 ${cleanedData.projectDescription}
 
----
-
 ## Installation Instructions
 
 ${cleanedData.projectInstallInstructions}
-
----
 
 ## Usage Instructions
 
 ${cleanedData.projectUsageInstructions}
 
----
-
 ## Contributing Guidelines
 
 ${cleanedData.projectContributingGuidelines}
 
----
-
 ## License Information
 
 ###${cleanedData.projectLicenseInformation}
+
 ${licenseLink} ${licenseInfo}
- 
----
 
 ## Acknowledgments
 
 ${cleanedData.projectAcknowledgments}
 
----
-
 ## Questions
+
 ${githubProfile}
 ${cleanedData.projectContactEmail}
-}
-
-
----
+${additionalQuestions}
 
 ## Resources
 
 ${cleanedData.projectResources}
 
----
 `.trim(); // in case there is any other whitespace
 }
 
