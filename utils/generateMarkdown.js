@@ -41,7 +41,7 @@ function renderLicenseLink(license) {
   if (!license) {
     return "";
   } else {
-    link = "./../LICENSE";
+    link = "./LICENSE";
     const linkTitle = license;
     return `[${linkTitle}](${link})`;
   }
@@ -133,7 +133,7 @@ ${cleanedData.projectContributingGuidelines}
 
 ## License Information
 
-###${cleanedData.projectLicenseInformation}
+### ${cleanedData.projectLicenseInformation}
 
 ${licenseLink} ${licenseInfo}
 
@@ -145,7 +145,8 @@ ${cleanedData.projectAcknowledgments}
 
 ${githubProfile}
 ${cleanedData.projectContactEmail}
-${additionalQuestions}
+
+### ${additionalQuestions}
 
 ## Resources
 

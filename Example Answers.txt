@@ -57,13 +57,6 @@ For questions or support, please contact:
 - [Markdown Guide](https://www.markdownguide.org/)
 - [Choose a License](https://choosealicense.com/)
 
-## Badges
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
-![npm](https://img.shields.io/npm/v/npm.svg)
+
 ```
 
-This README template incorporates elements from your js_rpg1 project (like the installation and usage instructions style) and describes the GitHub README Generator project. You can use this as a starting point and customize it further based on your specific project details and preferences.
-
-Citations:
-[1] https://github.com/savevsgames/js_rpg1

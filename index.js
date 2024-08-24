@@ -48,7 +48,7 @@ const questions = [
   },
 
   {
-    type: "input",
+    type: "editor",
     name: "projectDescription",
     message: colors.info(
       "Enter Project Description: \n NOTE - A brief overview of the project, explaining its purpose, features, and what problems it solves. This section should engage readers and provide context."
@@ -57,7 +57,7 @@ const questions = [
   },
 
   {
-    type: "input",
+    type: "editor",
     name: "projectInstallInstructions",
     message: colors.info(
       "Enter Installation Instructions: \n NOTE - Detailed steps on how to install and set up the project. This should include any dependencies, configuration requirements, and troubleshooting tips. \n * - This will open an editor for you to enter instructions. Enter your instructions, then save the file and close it to return to the CLI."
@@ -66,7 +66,7 @@ const questions = [
   },
 
   {
-    type: "input",
+    type: "editor",
     name: "projectUsageInstructions",
     message: colors.info(
       "Enter Usage Instructions: \n NOTE - Examples of how to use the project, including code snippets and any relevant commands. This section helps users understand how to interact with your project effectively. \n * - This will open an editor for you to enter instructions. Enter your instructions, then save the file and close it to return to the CLI."
@@ -75,7 +75,7 @@ const questions = [
   },
 
   {
-    type: "input",
+    type: "editor",
     name: "projectContributingGuidelines",
     message: colors.info(
       "Enter Contributing Guidelines: \n NOTE - Instructions for how others can contribute to the project, including coding standards, pull request processes, and any other relevant guidelines."
@@ -103,12 +103,13 @@ const questions = [
       "GNU Lesser General Public License v2.1",
       "Mozilla Public License 2.0",
       "The Unlicense",
+      "NO SPECIFIED LICENSE",
     ],
     waitUserInput: true,
   },
 
   {
-    type: "input",
+    type: "editor",
     name: "projectAcknowledgments",
     message: colors.info(
       "Enter Credits and Acknowledgments: \n NOTE - Recognition of contributors, libraries, or resources that were instrumental in development."
@@ -131,7 +132,7 @@ const questions = [
   },
 
   {
-    type: "input",
+    type: "editor",
     name: "projectContactAdditional",
     message: colors.info(
       "Enter instructions for users who wish to ask you questions: "
@@ -140,7 +141,7 @@ const questions = [
   },
 
   {
-    type: "input",
+    type: "editor",
     name: "projectResources",
     message: colors.info(
       "Enter Additional Resources: \n NOTE - Links to documentation, tutorials, or related projects that may help users further understand or utilize the project."
@@ -174,7 +175,7 @@ async function asyncQuestionaire() {
   try {
     const questionaireResponses = await promptQuestions();
     const markdown = utils.generateMarkdown(questionaireResponses);
-    await writeToFile("./output/README.md", markdown);
+    await writeToFile("README.md", markdown);
     console.log("Markdown created successfully:", markdown);
   } catch (error) {
     console.error(error);
