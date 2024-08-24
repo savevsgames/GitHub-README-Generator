@@ -13,8 +13,10 @@ function renderBadge(config) {
   };
   try {
     const badge = makeBadge(format);
-    const editedBadge = JSON.stringify(badge);
-    return JSON.parse(editedBadge);
+    console.log("Badge Created -> ", typeof badge);
+    return badge;
+    // const editedBadge = JSON.stringify(badge);
+    // return JSON.parse(editedBadge);
   } catch (e) {
     console.log(ValidationError, e); //
   }

@@ -3,9 +3,7 @@ import colors from "colors";
 import inquirer from "inquirer";
 import fs from "fs";
 import renderBadge from "./utils/renderBadge.js";
-import renderLicenseBadge from "./utils/generateMarkdown.js";
-import renderProjectBadgeLink from "./utils/generateMarkdown.js";
-import generateMarkdown from "./utils/generateMarkdown.js";
+import utils from "./utils/generateMarkdown.js";
 
 colors.setTheme({
   silly: "rainbow",
@@ -39,6 +37,15 @@ const titleQuestion = [
     message: colors.info(
       "Enter Project Title: \n NOTE - The title of your project should be clear and descriptive, giving readers an immediate understanding of what the project is about."
     ),
+    waitUserInput: true,
+    validate: (userInput) => {
+      if (userInput) {
+        return true;
+      } else {
+        console.log("You must enter a project title.");
+        return false;
+      }
+    },
   },
 ];
 const descriptionQuestion = [
@@ -48,11 +55,12 @@ const descriptionQuestion = [
     message: colors.info(
       "Enter Project Description: \n NOTE - A brief overview of the project, explaining its purpose, features, and what problems it solves. This section should engage readers and provide context."
     ),
+    waitUserInput: true,
   },
 ];
 const installQuestion = [
   {
-    type: "editor",
+    type: "input",
     name: "projectInstallInstructions",
     message: colors.info(
       "Enter Installation Instructions: \n NOTE - Detailed steps on how to install and set up the project. This should include any dependencies, configuration requirements, and troubleshooting tips. \n * - This will open an editor for you to enter instructions. Enter your instructions, then save the file and close it to return to the CLI."
@@ -63,7 +71,7 @@ const installQuestion = [
 
 const usageQuestion = [
   {
-    type: "editor",
+    type: "input",
     name: "projectUsageInstructions",
     message: colors.info(
       "Enter Usage Instructions: \n NOTE - Examples of how to use the project, including code snippets and any relevant commands. This section helps users understand how to interact with your project effectively. \n * - This will open an editor for you to enter instructions. Enter your instructions, then save the file and close it to return to the CLI."
@@ -73,7 +81,7 @@ const usageQuestion = [
 ];
 const contributionGuidelinesQuestion = [
   {
-    type: "editor",
+    type: "input",
     name: "projectContributingGuidelines",
     message: colors.info(
       "Enter Contributing Guidelines: \n NOTE - Instructions for how others can contribute to the project, including coding standards, pull request processes, and any other relevant guidelines."
@@ -103,6 +111,7 @@ const licenseInformationQuestion = [
       "Mozilla Public License 2.0",
       "The Unlicense",
     ],
+    waitUserInput: true,
   },
 ];
 const acknowledgementsQuestion = [
@@ -110,8 +119,9 @@ const acknowledgementsQuestion = [
     type: "input",
     name: "projectAcknowledgments",
     message: colors.info(
-      "Enter Credits and Acknowledgments: \n NOTE - Recognition of contributors, libraries, or resources that were instrumental in the project’s development."
+      "Enter Credits and Acknowledgments: \n NOTE - Recognition of contributors, libraries, or resources that were instrumental in development."
     ),
+    waitUserInput: true,
   },
 ];
 const contactQuestion = [
@@ -121,11 +131,12 @@ const contactQuestion = [
     message: colors.info(
       "Enter Contact Information: \n NOTE - Provide details on how users can reach out for support or questions, such as an email address or links to social media."
     ),
+    waitUserInput: true,
   },
 ];
 const resourcesQuestion = [
   {
-    type: "editor",
+    type: "input",
     name: "projectResources",
     message: colors.info(
       "Enter Additional Resources: \n NOTE - Links to documentation, tutorials, or related projects that may help users further understand or utilize the project."
@@ -244,7 +255,6 @@ function promptLicenseInformationQuestion(answers) {
   inquirer
     .prompt(licenseInformationQuestion)
     .then((licenseInformationAnswer) => {
-      renderLicenseBadge(licenseInformationAnswer);
       promptAcknowledgementsQuestion({
         ...answers,
         ...licenseInformationAnswer,
@@ -282,16 +292,33 @@ function promptBadgesQuestion(answers) {
     // Last Question - Write to JSON to test
     writeToFile("README_OBJ.json", finalAnswers);
     // Generate Markdown
-    const markdown = generateMarkdown(finalAnswers);
-    writeToFile("README.md", markdown);
+    const markdown = utils.generateMarkdown(finalAnswers);
+    // .replace(/\\n/g, "\n") // Replace \n with actual newlines
+    // .replace(/\\/g, ""); // Remove any remaining backslashes
+    console.log("Markdown: ", typeof markdown, markdown);
+    writeToFile("README.txt", markdown);
   });
 }
 
 // Function to write README file
 function writeToFile(fileName, data) {
-  fs.writeFile(`./output/${fileName}`, JSON.stringify(data), () => {
-    console.log("File Created Successfully!");
-  });
+  if (typeof data === String) {
+    fs.writeFile(`./output/${fileName}`, data, (error) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(typeof data, fileName, "File Created Successfully!");
+      }
+    });
+  } else {
+    fs.writeFile(`./output/${fileName}`, JSON.stringify(data), (error) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(typeof data, fileName, "File Created Successfully!");
+      }
+    });
+  }
 }
 
 // TODO: Create a function to initialize app
