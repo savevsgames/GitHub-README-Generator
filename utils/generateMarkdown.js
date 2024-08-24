@@ -29,6 +29,8 @@ function renderLicenseBadge(license) {
       return `[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)`;
     case "The Unlicense":
       return `[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)`;
+    case "NO SPECIFIED LICENSE":
+      return `[![No Specified License](https://img.shields.io/badge/license-Not%20Specified-lightgrey.svg)](https://shields.io/)`;
     default:
       return ""; // Return an empty string if the license is not recognized
   }
@@ -38,12 +40,12 @@ function renderLicenseBadge(license) {
 // If there is no license, return an empty string
 function renderLicenseLink(license) {
   let link = "";
-  if (!license) {
-    return "";
+  if (license === "NO SPECIFIED LICENSE") {
+    return "This repository has no specified license.";
   } else {
     link = "./LICENSE";
     const linkTitle = license;
-    return `[${linkTitle}](${link})`;
+    return `[LICENSE](${link})`;
   }
 }
 
@@ -66,7 +68,7 @@ function renderGithubProfileLink(profile) {
   } else {
     link = `https://github.com/${profile}`;
     const linkTitle = profile;
-    return `[${linkTitle}](${link})`;
+    return `GitHub Profile: [${linkTitle}](${link})`;
   }
 }
 
@@ -74,9 +76,9 @@ function renderGithubProfileLink(profile) {
 // If there is no license, return an empty string
 function renderLicenseSection(license) {
   if (license) {
-    return `LICENSE INFO: This repository is covered under ${license}.`;
+    return `This repository is covered under ${license}.`;
   } else {
-    return "LICENSE INFO: This repository has no specified license.";
+    return "This repository has no specified license.";
   }
 }
 
@@ -115,6 +117,17 @@ function generateMarkdown(data) {
 
 ${licenseBadge}
 
+## Table of Contents
+
+1. [Description](#description)
+2. [Installation Instructions](#installation-instructions)
+3. [Usage Instructions](#usage-instructions)
+4. [Contributing Guidelines](#contributing-guidelines)
+5. [License Information](#license-information)
+6. [Acknowledgments](#acknowledgments)
+7. [Questions](#questions)
+8. [Resources](#resources)
+
 ## Description
 
 ${cleanedData.projectDescription}
@@ -135,7 +148,8 @@ ${cleanedData.projectContributingGuidelines}
 
 ### ${cleanedData.projectLicenseInformation}
 
-${licenseLink} ${licenseInfo}
+${licenseLink}\n 
+LICENSE INFO: ${licenseInfo}
 
 ## Acknowledgments
 
@@ -143,8 +157,8 @@ ${cleanedData.projectAcknowledgments}
 
 ## Questions
 
-${githubProfile}
-${cleanedData.projectContactEmail}
+${githubProfile}\n
+Email: ${cleanedData.projectContactEmail}
 
 ${additionalQuestions}
 

@@ -2,6 +2,17 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## Table of Contents
+
+1. [Description](#description)
+2. [Installation Instructions](#installation-instructions)
+3. [Usage Instructions](#usage-instructions)
+4. [Contributing Guidelines](#contributing-guidelines)
+5. [License Information](#license-information)
+6. [Acknowledgments](#acknowledgments)
+7. [Questions](#questions)
+8. [Resources](#resources)
+
 ## Description
 
 The GitHub README Generator is a command-line application that dynamically generates a professional README.md file based on user input. This tool streamlines the process of creating comprehensive project documentation, ensuring that developers can quickly produce high-quality READMEs for their GitHub repositories.
@@ -31,8 +42,6 @@ To use the GitHub README Generator:
    ```
    node index.js
    ```
-2. Answer the prompts to provide information about your project.
-3. Once all prompts are answered, the README.md file will be generated in the project directory.
 
 ## Contributing Guidelines
 
@@ -48,7 +57,9 @@ Contributions to the GitHub README Generator are welcome! Please follow these st
 
 ### MIT License
 
-[MIT License](./LICENSE) LICENSE INFO: This repository is covered under MIT License.
+[LICENSE](./LICENSE)
+ 
+LICENSE INFO: This repository is covered under MIT License.
 
 ## Acknowledgments
 
@@ -68,10 +79,11 @@ Thank you to all the contributors and maintainers of these incredible projects. 
 
 ## Questions
 
-[savevsgames](https://github.com/savevsgames)
-gregcbarker@gmail.com
+GitHub Profile: [savevsgames](https://github.com/savevsgames)
 
-### For questions or support, please create an issue.
+Email: gregcbarker@gmail.com
+
+For questions or support, please create an issue.
 
 ## Resources
 
