@@ -2,21 +2,18 @@
 # GitHub README Generator
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![Badge](additional_badge_1.svg) ![Badge](additional_badge_2.svg) ![Badge](additional_badge_3.svg) ![Badge](additional_badge_4.svg) ![Badge](additional_badge_5.svg) 
+![Badge](additional_badge_1.svg) ![Badge](additional_badge_2.svg) ![Badge](additional_badge_3.svg) ![Badge](additional_badge_4.svg) ![Badge](additional_badge_5.svg) ![Badge](additional_badge_6.svg) ![Badge](additional_badge_7.svg) 
 
 ## Table of Contents
 
-- [GitHub README Generator](#github-readme-generator)
-  - [Table of Contents](#table-of-contents)
-  - [Description](#description)
-  - [Installation Instructions](#installation-instructions)
-  - [Usage Instructions](#usage-instructions)
-  - [Contributing Guidelines](#contributing-guidelines)
-  - [License Information](#license-information)
-    - [MIT License](#mit-license)
-  - [Acknowledgments](#acknowledgments)
-  - [Questions](#questions)
-  - [Resources](#resources)
+1. [Description](#description)
+2. [Installation Instructions](#installation-instructions)
+3. [Usage Instructions](#usage-instructions)
+4. [Contributing Guidelines](#contributing-guidelines)
+5. [License Information](#license-information)
+6. [Acknowledgments](#acknowledgments)
+7. [Questions](#questions)
+8. [Resources](#resources)
 
 ## Description
 

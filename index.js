@@ -148,6 +148,16 @@ const questions = [
     waitUserInput: true,
   },
 ];
+// CONFIRM QUESTION
+const confirmQuestion = [
+  {
+    type: "confirm",
+    name: "makeCustomBadges",
+    message: "Do you want to make custom badges to add to your repo? (just hit enter for YES)?",
+    default: true,
+  },
+];
+
 // BADGES QUESTIONAIRE
 const badgeQuestions = [
   {
@@ -242,6 +252,22 @@ function promptQuestions() {
 }
 
 // Function to prompt users with 2nd questionaire to add more badges
+async function confirmMoreBadgesQuestion() {
+  return new Promise((resolve, reject) => {
+    inquirer
+      .prompt(confirmQuestion)
+      .then((confirmAnswer) => {
+          console.log("Confirmation Answer: ", typeof confirmAnswer, confirmAnswer);
+        resolve(confirmAnswer); // Resolve the promise by completing user input
+      })
+      .catch((error) => {
+        console.error(error);
+        reject(error); // Reject if user does not complete
+      });
+  });
+}
+
+// Function to add more badges
 async function promptBadgeQuestions() {
   const badgeArray = [];
   const badgeFileNameArray = [];
@@ -304,16 +330,22 @@ async function asyncQuestionaire() {
     const questionaireResponses = await promptQuestions();
     console.log("Main questionnaire completed.");
 
-    console.log("Starting badge questionnaire...");
-    const badgeQuestionaireResponses = await promptBadgeQuestions();
-    console.log("Badge questionnaire completed.");
+    console.log("Starting additional badges confirmation....");
+    const confirmMoreBadges = await confirmMoreBadgesQuestion();
+    console.log("Additional badges confirmation completed....");
+    let badgeQuestionaireResponses;
+    if (confirmMoreBadges) {
+      console.log("Starting badge questionnaire...");
+      badgeQuestionaireResponses = await promptBadgeQuestions();
+      console.log("Badge questionnaire completed.");
+      
+      console.log("Checking if all badge promises are resolved...");
+      if (Array.isArray(badgeQuestionaireResponses)) {
+        await Promise.all(badgeQuestionaireResponses);
+      }
 
-    console.log("Checking if all badge promises are resolved...");
-    if (Array.isArray(badgeQuestionaireResponses)) {
-      await Promise.all(badgeQuestionaireResponses);
+      console.log("All badge promises confirmed resolved.");
     }
-    console.log("All badge promises confirmed resolved.");
-
     // Pull file to get badgeArray
     // const badgesArrayFormatted = await fs.readFile("./additional_badges.json");
 
