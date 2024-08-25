@@ -11,13 +11,13 @@ function renderBadge(config) {
     // Each offers a different visual design.
     style: config.style,
   };
+  console.log("Badge info before badge: ", typeof format, format);
   try {
     const badge = makeBadge(format);
     console.log("Badge Created -> ", typeof badge, badge);
-
     return badge;
   } catch (e) {
-    console.log(ValidationError, e);
+    console.log("ValidationError", e);
   }
 }
 
@@ -112,17 +112,16 @@ function generateMarkdown(data, badgeData) {
   let badgeList;
   const renderedBadgeList = [];
   badgeData ? (badgeList = badgeData) : (badgeList = []);
-
+  console.log("badgeData", typeof badgeData, badgeData);
+  console.log("badgeList", typeof badgeList, badgeList);
   for (let i = 0; i < badgeList.length; i++) {
     const newBadge = renderBadge(badgeList[i]);
     console.log(newBadge);
     renderedBadgeList.push(newBadge);
   }
-  let markdownBadgeList;
+  let markdownBadgeList = "";
   for (let i = 0; i < renderedBadgeList.length; i++) {
-    markdownBadgeList += `
-    [!Badge](${renderedBadgeList[i]})
-    `;
+    markdownBadgeList += ` ${renderedBadgeList[i]} `;
   }
 
   const cleanedData = {
@@ -156,9 +155,11 @@ function generateMarkdown(data, badgeData) {
     `
 # ${cleanedData.projectTitle}
 
-${licenseBadge}` +
+${licenseBadge}
+` +
     markdownBadgeList +
     `
+
 
 ## Table of Contents
 
@@ -211,7 +212,7 @@ ${additionalQuestions}
 
 ${cleanedData.projectResources}
 
-`.trim()
+`
   ); // in case there is any other whitespace
 }
 
