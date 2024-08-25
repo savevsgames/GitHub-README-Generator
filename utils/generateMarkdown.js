@@ -1,3 +1,26 @@
+import { makeBadge, ValidationError } from "badge-maker";
+
+function renderBadge(config) {
+  const format = {
+    label: config.label, // (Optional) Badge label
+    message: config.message, // (Required) Badge message
+    labelColor: config.labelColor, // (Optional) Label color
+    color: config.color, // (Optional) Message color
+
+    // (Optional) One of: 'plastic', 'flat', 'flat-square', 'for-the-badge' or 'social'
+    // Each offers a different visual design.
+    style: config.style,
+  };
+  console.log("Badge info before badge: ", typeof format, format);
+  try {
+    const badge = makeBadge(format);
+    console.log("Badge Created -> ", typeof badge, badge);
+    return badge;
+  } catch (e) {
+    console.log("ValidationError", e);
+  }
+}
+
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 
@@ -83,8 +106,24 @@ function renderLicenseSection(license) {
 }
 
 // TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
+function generateMarkdown(data, badgeData) {
   // Clean the data object properties
+
+  let badgeList;
+  const renderedBadgeList = [];
+  badgeData ? (badgeList = badgeData) : (badgeList = []);
+  console.log("badgeData", typeof badgeData, badgeData);
+  console.log("badgeList", typeof badgeList, badgeList);
+  for (let i = 0; i < badgeList.length; i++) {
+    const newBadge = renderBadge(badgeList[i]);
+    console.log(newBadge);
+    renderedBadgeList.push(newBadge);
+  }
+  let markdownBadgeList = "";
+  for (let i = 0; i < renderedBadgeList.length; i++) {
+    markdownBadgeList += ` ${renderedBadgeList[i]} `;
+  }
+
   const cleanedData = {
     projectTitle: data.projectTitle.trim(),
     projectDescription: data.projectDescription.trim(),
@@ -112,10 +151,14 @@ function generateMarkdown(data) {
   const additionalQuestions = renderAdditionalQuestions(
     cleanedData.projectContactAdditional
   );
-  return `
+  return (
+    `
 # ${cleanedData.projectTitle}
 
 ${licenseBadge}
+` +
+    markdownBadgeList +
+    `
 
 ## Table of Contents
 
@@ -168,9 +211,10 @@ ${additionalQuestions}
 
 ${cleanedData.projectResources}
 
-`.trim(); // in case there is any other whitespace
+`
+  ); // in case there is any other whitespace
 }
 
-export default {
-  generateMarkdown,
-};
+export { generateMarkdown };
+
+export { renderBadge };

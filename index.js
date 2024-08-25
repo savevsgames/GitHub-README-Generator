@@ -2,8 +2,7 @@
 import colors from "colors";
 import inquirer from "inquirer";
 import { promises as fs } from "fs";
-import utils from "./utils/generateMarkdown.js";
-import generateMarkdown from "./utils/generateMarkdown.js";
+import { generateMarkdown } from "./utils/generateMarkdown.js";
 
 colors.setTheme({
   silly: "rainbow",
@@ -149,6 +148,83 @@ const questions = [
     waitUserInput: true,
   },
 ];
+// BADGES QUESTIONAIRE
+const badgeQuestions = [
+  {
+    type: "input",
+    name: "label",
+    message: colors.info("(Optional) Badge label"),
+    waitUserInput: true,
+    default: "GitHub",
+  },
+  {
+    type: "input",
+    name: "message",
+    message: colors.info("(Required) Badge message"),
+    waitUserInput: true,
+    validate: (userInput) => {
+      if (userInput) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+  {
+    type: "list",
+    name: "labelColor",
+    message: colors.info("(Optional) Label color"),
+    waitUserInput: true,
+    default: "green",
+    choices: [
+      "rainbow",
+      "cyan",
+      "grey",
+      "green",
+      "yellow",
+      "blue",
+      "red",
+      "black",
+      "white",
+      "magenta",
+    ],
+  },
+  {
+    type: "list",
+    name: "color",
+    message: colors.info("(Optional) Message color"),
+    waitUserInput: true,
+    default: "white",
+    choices: [
+      "rainbow",
+      "cyan",
+      "grey",
+      "green",
+      "yellow",
+      "blue",
+      "red",
+      "black",
+      "white",
+      "magenta",
+    ],
+  },
+  {
+    type: "list",
+    name: "style",
+    message: colors.info(
+      "(Optional) One of: 'plastic', 'flat', 'flat-square', 'for-the-badge' or 'social'"
+    ),
+    waitUserInput: true,
+    default: "flat",
+    choices: ["plastic", "flat", "flat-square", "for-the-badge", "social"],
+  },
+  {
+    type: "confirm",
+    name: "makeAnotherBadge",
+    message: "Do you want to make another badge? (just hit enter for YES)?",
+    default: true,
+  },
+];
 
 // Function to prompt users with questionaire
 function promptQuestions() {
@@ -165,6 +241,31 @@ function promptQuestions() {
   });
 }
 
+// Function to prompt users with 2nd questionaire to add more badges
+async function promptBadgeQuestions() {
+  const badgeArray = [];
+  return new Promise((resolve, reject) => {
+    function promptInquirer() {
+      inquirer
+        .prompt(badgeQuestions)
+        .then((badgeAnswers) => {
+          badgeArray.push(badgeAnswers);
+          if (badgeAnswers.makeAnotherBadge) {
+            promptInquirer();
+          } else {
+            writeToFile("additional_badges.json", JSON.stringify(badgeArray));
+            resolve(badgeArray); // Resolve the promise by completing user input
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          reject(error); // Reject if user does not complete
+        });
+    }
+    promptInquirer();
+  });
+}
+
 // Function to write README file
 async function writeToFile(fileName, data) {
   await fs.writeFile(fileName, data);
@@ -173,12 +274,35 @@ async function writeToFile(fileName, data) {
 // async function to handle prompt promise
 async function asyncQuestionaire() {
   try {
+    console.log("Starting main questionnaire...");
     const questionaireResponses = await promptQuestions();
-    const markdown = utils.generateMarkdown(questionaireResponses);
+    console.log("Main questionnaire completed.");
+
+    console.log("Starting badge questionnaire...");
+    const badgeQuestionaireResponses = await promptBadgeQuestions();
+    console.log("Badge questionnaire completed.");
+
+    console.log("Checking if all badge promises are resolved...");
+    if (Array.isArray(badgeQuestionaireResponses)) {
+      await Promise.all(badgeQuestionaireResponses);
+    }
+    console.log("All badge promises confirmed resolved.");
+
+    // Pull file to get badgeArray
+    // const badgesArrayFormatted = await fs.readFile("./additional_badges.json");
+
+    console.log("Generating markdown...");
+    const markdown = generateMarkdown(
+      questionaireResponses,
+      badgeQuestionaireResponses
+    );
+    console.log("Markdown generated.");
+
+    console.log("Writing file...");
     await writeToFile("README.md", markdown);
-    console.log("Markdown created successfully:", markdown);
+    console.log("File written successfully.");
   } catch (error) {
-    console.error(error);
+    console.error("An error occurred:", error);
   }
 }
 

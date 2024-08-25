@@ -1,24 +1,24 @@
+
 # GitHub README Generator
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+ <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="62" height="20" role="img" aria-label="Node: JS"><title>Node: JS</title><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="62" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="39" height="20" fill="#97ca00"/><rect x="39" width="23" height="20" fill="white"/><rect width="62" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text aria-hidden="true" x="205" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">Node</text><text x="205" y="140" transform="scale(.1)" fill="#fff" textLength="290">Node</text><text aria-hidden="true" x="495" y="150" fill="#ccc" fill-opacity=".3" transform="scale(.1)" textLength="130">JS</text><text x="495" y="140" transform="scale(.1)" fill="#333" textLength="130">JS</text></g></svg>  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="90" height="20" role="img" aria-label="JS: JavaScript"><title>JS: JavaScript</title><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="90" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="23" height="20" fill="#dfb317"/><rect x="23" width="67" height="20" fill="white"/><rect width="90" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text aria-hidden="true" x="125" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="130">JS</text><text x="125" y="140" transform="scale(.1)" fill="#fff" textLength="130">JS</text><text aria-hidden="true" x="555" y="150" fill="#ccc" fill-opacity=".3" transform="scale(.1)" textLength="570">JavaScript</text><text x="555" y="140" transform="scale(.1)" fill="#333" textLength="570">JavaScript</text></g></svg>  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="97" height="20" role="img" aria-label="Npm: COLORS"><title>Npm: COLORS</title><style>a:hover #llink{fill:url(#b);stroke:#ccc}a:hover #rlink{fill:#4183c4}</style><linearGradient id="a" x2="0" y2="100%"><stop offset="0" stop-color="#fcfcfc" stop-opacity="0"/><stop offset="1" stop-opacity=".1"/></linearGradient><linearGradient id="b" x2="0" y2="100%"><stop offset="0" stop-color="#ccc" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><g stroke="#d5d5d5"><rect stroke="none" fill="#fcfcfc" x="0.5" y="0.5" width="35" height="19" rx="2"/><rect x="41.5" y="0.5" width="55" height="19" rx="2" fill="#fafafa"/><rect x="41" y="7.5" width="0.5" height="5" stroke="#fafafa"/><path d="M41.5 6.5 l-3 3v1 l3 3" stroke="d5d5d5" fill="#fafafa"/></g><g aria-hidden="true" fill="#333" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" text-rendering="geometricPrecision" font-weight="700" font-size="110px" line-height="14px"><rect id="llink" stroke="#d5d5d5" fill="url(#a)" x=".5" y=".5" width="35" height="19" rx="2"/><text aria-hidden="true" x="175" y="150" fill="#fff" transform="scale(.1)" textLength="250">Npm</text><text x="175" y="140" transform="scale(.1)" textLength="250">Npm</text><text aria-hidden="true" x="685" y="150" fill="#fff" transform="scale(.1)" textLength="470">COLORS</text><text id="rlink" x="685" y="140" transform="scale(.1)" textLength="470">COLORS</text></g></svg>  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="140.75" height="28" role="img" aria-label="NPM: INQUIRER"><title>NPM: INQUIRER</title><g shape-rendering="crispEdges"><rect width="48.75" height="28" fill="cyan"/><rect x="48.75" width="92" height="28" fill="#4c1"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="100"><text transform="scale(.1)" x="243.75" y="175" textLength="247.5" fill="#333">NPM</text><text transform="scale(.1)" x="947.5" y="175" textLength="680" fill="#fff" font-weight="bold">INQUIRER</text></g></svg> 
 
 ## Table of Contents
 
-- [GitHub README Generator](#github-readme-generator)
-  - [Table of Contents](#table-of-contents)
-  - [Description](#description)
-  - [Installation Instructions](#installation-instructions)
-  - [Usage Instructions](#usage-instructions)
-  - [Contributing Guidelines](#contributing-guidelines)
-  - [License Information](#license-information)
-    - [MIT License](#mit-license)
-  - [Acknowledgments](#acknowledgments)
-  - [Questions](#questions)
-  - [Resources](#resources)
+1. [Description](#description)
+2. [Installation Instructions](#installation-instructions)
+3. [Usage Instructions](#usage-instructions)
+4. [Contributing Guidelines](#contributing-guidelines)
+5. [License Information](#license-information)
+6. [Acknowledgments](#acknowledgments)
+7. [Questions](#questions)
+8. [Resources](#resources)
 
 ## Description
 
 The GitHub README Generator is a command-line application that dynamically generates a professional README.md file based on user input. This tool streamlines the process of creating comprehensive project documentation, ensuring that developers can quickly produce high-quality READMEs for their GitHub repositories.
+
 ![Readme Generator Screenshot](./assets/images/readme_generator_screenshot.png)
 
 ## Installation Instructions
@@ -64,7 +64,7 @@ Contributions to the GitHub README Generator are welcome! Please follow these st
 ### MIT License
 
 [LICENSE](./LICENSE)
-
+ 
 LICENSE INFO: This repository is covered under MIT License.
 
 ## Acknowledgments
@@ -96,3 +96,4 @@ For questions or support, please create an issue.
 - [Inquirer.js Documentation](https://github.com/SBoudrias/Inquirer.js#readme)
 - [Markdown Guide](https://www.markdownguide.org/)
 - [Choose a License](https://choosealicense.com/)
+
