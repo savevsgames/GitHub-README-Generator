@@ -25,7 +25,7 @@ function renderBadge(config) {
     console.log("Badge Created -> ", typeof badge, badge);
     const base64Badge = convertSvgToBase64(badge);
     console.log("BASE64Badge Created -> ", typeof base64Badge, base64Badge);
-    return base64Badge;
+    return badge;
   } catch (e) {
     console.log("ValidationError", e);
   }
@@ -117,22 +117,10 @@ function renderLicenseSection(license) {
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data, badgeData) {
-  // Clean the data object properties
-
   let badgeList;
-  const renderedBadgeList = [];
   badgeData ? (badgeList = badgeData) : (badgeList = []);
   console.log("badgeData", typeof badgeData, badgeData);
   console.log("badgeList", typeof badgeList, badgeList);
-  for (let i = 0; i < badgeList.length; i++) {
-    const newBadge = renderBadge(badgeList[i]);
-    console.log(newBadge);
-    renderedBadgeList.push(newBadge);
-  }
-  let markdownBadgeList = "";
-  for (let i = 0; i < renderedBadgeList.length; i++) {
-    markdownBadgeList += `![Badge](${renderedBadgeList[i]}) `;
-  }
 
   const cleanedData = {
     projectTitle: data.projectTitle.trim(),
@@ -167,7 +155,7 @@ function generateMarkdown(data, badgeData) {
 
 ${licenseBadge}
 ` +
-    markdownBadgeList +
+    badgeList +
     `
 
 ## Table of Contents

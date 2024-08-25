@@ -2,7 +2,7 @@
 import colors from "colors";
 import inquirer from "inquirer";
 import { promises as fs } from "fs";
-import { generateMarkdown } from "./utils/generateMarkdown.js";
+import { generateMarkdown, renderBadge } from "./utils/generateMarkdown.js";
 
 colors.setTheme({
   silly: "rainbow",
@@ -244,17 +244,43 @@ function promptQuestions() {
 // Function to prompt users with 2nd questionaire to add more badges
 async function promptBadgeQuestions() {
   const badgeArray = [];
+  const badgeFileNameArray = [];
   return new Promise((resolve, reject) => {
-    function promptInquirer() {
+    async function promptInquirer() {
       inquirer
         .prompt(badgeQuestions)
         .then((badgeAnswers) => {
           badgeArray.push(badgeAnswers);
           if (badgeAnswers.makeAnotherBadge) {
+            // instead of just writing the badge array - convert to svg first and write individual files
+            const fileName = `additional_badge_${[badgeArray.length]}.svg`;
+            badgeFileNameArray.push(fileName);
+            const svgBadge = renderBadge(badgeAnswers);
+            writeToFile(fileName, svgBadge);
             promptInquirer();
           } else {
-            writeToFile("additional_badges.json", JSON.stringify(badgeArray));
-            resolve(badgeArray); // Resolve the promise by completing user input
+            // Do the last badge
+            const fileName = `additional_badge_${[badgeArray.length]}.svg`;
+            badgeFileNameArray.push(fileName);
+            const svgBadge = renderBadge(badgeAnswers);
+            writeToFile(fileName, svgBadge);
+            // Write the whole object to a file for confirmation of structure
+            writeToFile(`additional_badges.json`, JSON.stringify(badgeArray));
+
+            function getBadgeListFileMarkdown(fileList) {
+              let markdownBadgeList = "";
+              // Loop through entries in badgeFile and add them to the markdownBadgeList
+              for (let i = 0; i < fileList.length; i++) {
+                let badgeFile = fileList[i];
+                markdownBadgeList += `![Badge](${badgeFile}) `;
+              }
+              return markdownBadgeList;
+            }
+
+            const badgeMarkdownFinal =
+              getBadgeListFileMarkdown(badgeFileNameArray);
+
+            resolve(badgeMarkdownFinal); // Resolve the promise by completing user input
           }
         })
         .catch((error) => {
