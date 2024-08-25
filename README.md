@@ -1,19 +1,7 @@
 
-# fasdfs
+# Greg
 
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)undefined
-    [!Badge](undefined)
-    
-    [!Badge](undefined)
-    
-    [!Badge](undefined)
-    
-    [!Badge](undefined)
-    
-    [!Badge](undefined)
-    
-    [!Badge](undefined)
-    ## Table of Contents
+[![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)undefined## Table of Contents
 
 1. [Description](#description)
 2. [Installation Instructions](#installation-instructions)
@@ -26,42 +14,42 @@
 
 ## Description
 
-asdfasd
+Barker
 
 ![Readme Generator Screenshot](./assets/images/readme_generator_screenshot.png)
 
 ## Installation Instructions
 
-asdfasdf
+Can
 
 ## Usage Instructions
 
-asdfasdfas
+DO
 
 ## Contributing Guidelines
 
-asdfasdf
+IT
 
 ## License Information
 
-### Apache License 2.0
+### Boost Software License 1.0
 
 [LICENSE](./LICENSE)
  
-LICENSE INFO: This repository is covered under Apache License 2.0.
+LICENSE INFO: This repository is covered under Boost Software License 1.0.
 
 ## Acknowledgments
 
-sadfsdaf
+TO
 
 ## Questions
 
-GitHub Profile: [asdfasd](https://github.com/asdfasd)
+GitHub Profile: [IT](https://github.com/IT)
 
-Email: asdf
+Email: PROVE
 
-dfasdf
+IT
 
 ## Resources
 
-asdfasd
+NOW

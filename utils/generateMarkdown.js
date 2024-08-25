@@ -14,10 +14,10 @@ function renderBadge(config) {
   try {
     const badge = makeBadge(format);
     console.log("Badge Created -> ", typeof badge, badge);
-    // writeToFile(fileName, badge);
+
     return badge;
   } catch (e) {
-    console.log(ValidationError, e); //
+    console.log(ValidationError, e);
   }
 }
 
@@ -108,18 +108,13 @@ function renderLicenseSection(license) {
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data, badgeData) {
   // Clean the data object properties
-  function objectToArray(obj) {
-    return Object.values(obj);
-  }
 
   let badgeList;
   const renderedBadgeList = [];
-  badgeData ? (badgeList = badgeData) : (badgeList = {});
+  badgeData ? (badgeList = badgeData) : (badgeList = []);
 
-  const arrayOfBadgeObjects = objectToArray(badgeList);
-
-  for (let i = 0; i < arrayOfBadgeObjects.length; i++) {
-    const newBadge = renderBadge(arrayOfBadgeObjects[i]);
+  for (let i = 0; i < badgeList.length; i++) {
+    const newBadge = renderBadge(badgeList[i]);
     console.log(newBadge);
     renderedBadgeList.push(newBadge);
   }
