@@ -13,6 +13,7 @@
     "badge-maker": "^4.0.0",
     "colors": "^1.4.0",
     "inquirer": "^8.2.4",
+    "svg64": "^2.0.0",
     "underscore": "^1.13.7"
   }
 }

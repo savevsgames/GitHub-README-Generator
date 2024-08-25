@@ -1,6 +1,14 @@
 import { makeBadge, ValidationError } from "badge-maker";
+import svg64 from "svg64";
 
 function renderBadge(config) {
+  // function to convert svg to base64
+  function convertSvgToBase64(svgString) {
+    // svg64 expects a valid SVG string
+    const base64 = svg64(svgString);
+    return base64;
+  }
+
   const format = {
     label: config.label, // (Optional) Badge label
     message: config.message, // (Required) Badge message
@@ -15,7 +23,9 @@ function renderBadge(config) {
   try {
     const badge = makeBadge(format);
     console.log("Badge Created -> ", typeof badge, badge);
-    return badge;
+    const base64Badge = convertSvgToBase64(badge);
+    console.log("BASE64Badge Created -> ", typeof base64Badge, base64Badge);
+    return base64Badge;
   } catch (e) {
     console.log("ValidationError", e);
   }
@@ -121,7 +131,7 @@ function generateMarkdown(data, badgeData) {
   }
   let markdownBadgeList = "";
   for (let i = 0; i < renderedBadgeList.length; i++) {
-    markdownBadgeList += ` ${renderedBadgeList[i]} `;
+    markdownBadgeList += `![Badge](${renderedBadgeList[i]}) `;
   }
 
   const cleanedData = {
