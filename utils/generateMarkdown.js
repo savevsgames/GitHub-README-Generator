@@ -136,6 +136,7 @@ function generateMarkdown(data, badgeData) {
     projectResources: data.projectResources.trim(),
   };
 
+  // extract neccessary info first
   const licenseLink = renderLicenseLink(cleanedData.projectLicenseInformation);
   const licenseBadge = renderLicenseBadge(
     cleanedData.projectLicenseInformation
@@ -149,16 +150,14 @@ function generateMarkdown(data, badgeData) {
   const additionalQuestions = renderAdditionalQuestions(
     cleanedData.projectContactAdditional
   );
-  return (
-    `
-# ${cleanedData.projectTitle}
 
-${licenseBadge}
-` +
-    badgeList +
-    `
+  // Title
+  const titleInfo = `# ${cleanedData.projectTitle}
 
-## Table of Contents
+${licenseBadge} + badgeList
+`;
+  // Table of Contents
+  const tocInfo = `## Table of Contents
 
 1. [Description](#description)
 2. [Installation Instructions](#installation-instructions)
@@ -168,49 +167,66 @@ ${licenseBadge}
 6. [Acknowledgments](#acknowledgments)
 7. [Questions](#questions)
 8. [Resources](#resources)
-
-## Description
+  `;
+  // Description
+  const descriptionInfo = `## Description
 
 ${cleanedData.projectDescription}
 
 ![Readme Generator Screenshot](./assets/images/readme_generator_screenshot.png)
-
-## Installation Instructions
+`;
+  // InstallInstructions
+  const installationInfo = `## Installation Instructions
 
 ${cleanedData.projectInstallInstructions}
-
-## Usage Instructions
+`;
+  // UsageInstructions
+  const usageInfo = `## Usage Instructions
 
 ${cleanedData.projectUsageInstructions}
-
-## Contributing Guidelines
+`;
+  // Contributing Guidelines
+  const contributionInfo = `## Contributing Guidelines
 
 ${cleanedData.projectContributingGuidelines}
-
-## License Information
+`;
+  // LicenseInformation
+  const licenseMarkdownInfo = `## License Information
 
 ### ${cleanedData.projectLicenseInformation}
-
-${licenseLink}\n 
-LICENSE INFO: ${licenseInfo}
-
-## Acknowledgments
+`;
+  // Ancknowledgements
+  const acknowledgementInfo = `## Acknowledgments
 
 ${cleanedData.projectAcknowledgments}
-
-## Questions
+`;
+  // Questions
+  const questionsInfo = `## Questions
 
 ${githubProfile}\n
 Email: ${cleanedData.projectContactEmail}
 
 ${additionalQuestions}
-
-## Resources
+`;
+  // Resources
+  const resourcesInfo = `## Resources
 
 ${cleanedData.projectResources}
+`;
 
-`
-  ); // in case there is any other whitespace
+  // build the markdown file with all the array values that exist.
+
+  return `${titleInfo}
+${tocInfo}
+${descriptionInfo}
+${installationInfo}
+${usageInfo}
+${contributionInfo}
+${licenseMarkdownInfo}
+${acknowledgementInfo}
+${questionsInfo}
+${resourcesInfo}
+`;
 }
 
 export { generateMarkdown };
