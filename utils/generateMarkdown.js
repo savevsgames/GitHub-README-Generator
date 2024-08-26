@@ -210,8 +210,7 @@ ${additionalQuestions}
   // Resources
   const resourcesInfo = `## Resources
 
-${cleanedData.projectResources}
-`;
+${cleanedData.projectResources}`;
 
   // build the markdown file with all the array values that exist.
 
@@ -224,8 +223,7 @@ ${contributionInfo}
 ${licenseMarkdownInfo}
 ${acknowledgementInfo}
 ${questionsInfo}
-${resourcesInfo}
-`;
+${resourcesInfo}`;
 }
 
 export { generateMarkdown };
