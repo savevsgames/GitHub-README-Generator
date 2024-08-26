@@ -26,26 +26,15 @@ The GitHub README Generator is a command-line application that dynamically gener
 
 To install the GitHub README Generator, follow these steps:
 
-1. Clone the repository to your local machine:
-
-- git clone <https://github.com/savevsgames/GitHub-README-Generator.git>
-  
-2. Navigate to the project directory:
-
-- cd GitHub-README-Generator
-
-3. Install the required dependencies:
-  
-- npm install
+1. Clone the repository to your local machine: - git clone https://github.com/savevsgames/GitHub-README-Generator.git
+2. Navigate to the project directory: - cd GitHub-README-Generator
+3. Install the required dependencies: - npm install
 
 ## Usage Instructions
 
 To use the GitHub README Generator:
 
-1. Run the application:
-  
-- node index.js
-
+1. Run the application: - node index.js  
 2. Answer the prompts to provide information about your project.
 3. Once all prompts are answered, the README.md file will be generated in the project directory.
 
@@ -85,7 +74,7 @@ Thank you to all the contributors and maintainers of these incredible projects. 
 
 GitHub Profile: [savevsgames](https://github.com/savevsgames)
 
-Email: <gregcbarker@gmail.com>
+Email: gregcbarker@gmail.com
 
 For questions or support, please create an issue.
 
