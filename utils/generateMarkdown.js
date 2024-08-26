@@ -1,4 +1,4 @@
-import { makeBadge, ValidationError } from "badge-maker";
+import { makeBadge } from "badge-maker";
 import svg64 from "svg64";
 
 function renderBadge(config) {
@@ -14,20 +14,17 @@ function renderBadge(config) {
     message: config.message, // (Required) Badge message
     labelColor: config.labelColor, // (Optional) Label color
     color: config.color, // (Optional) Message color
-
-    // (Optional) One of: 'plastic', 'flat', 'flat-square', 'for-the-badge' or 'social'
-    // Each offers a different visual design.
-    style: config.style,
+    style: config.style, // (Optional) One of: 'plastic', 'flat', 'flat-square', 'for-the-badge' or 'social'
   };
   console.log("Badge info before badge: ", typeof format, format);
   try {
     const badge = makeBadge(format);
     console.log("Badge Created -> ", typeof badge, badge);
-    const base64Badge = convertSvgToBase64(badge);
-    console.log("BASE64Badge Created -> ", typeof base64Badge, base64Badge);
+    // const base64Badge = convertSvgToBase64(badge);
+    // console.log("BASE64Badge Created -> ", typeof base64Badge, base64Badge);
     return badge;
-  } catch (e) {
-    console.log("ValidationError", e);
+  } catch (error) {
+    console.error("ValidationError", error);
   }
 }
 
@@ -77,7 +74,7 @@ function renderLicenseLink(license) {
     return "This repository has no specified license.";
   } else {
     link = "./LICENSE";
-    const linkTitle = license;
+    // const linkTitle = license;
     return `[LICENSE](${link})`;
   }
 }
@@ -119,8 +116,8 @@ function renderLicenseSection(license) {
 function generateMarkdown(data, badgeData) {
   let badgeList;
   badgeData ? (badgeList = badgeData) : (badgeList = []);
-  console.log("badgeData", typeof badgeData, badgeData);
-  console.log("badgeList", typeof badgeList, badgeList);
+  // console.log("badgeData", typeof badgeData, badgeData);
+  // console.log("badgeList", typeof badgeList, badgeList);
 
   const cleanedData = {
     projectTitle: data.projectTitle.trim(),
@@ -154,7 +151,7 @@ function generateMarkdown(data, badgeData) {
   // Title
   const titleInfo = `# ${cleanedData.projectTitle}
 
-${licenseBadge} + badgeList
+${licenseBadge} ${badgeList}
 `;
   // Table of Contents
   const tocInfo = `## Table of Contents
@@ -194,6 +191,8 @@ ${cleanedData.projectContributingGuidelines}
   const licenseMarkdownInfo = `## License Information
 
 ### ${cleanedData.projectLicenseInformation}
+
+${licenseLink} ${licenseInfo}
 `;
   // Ancknowledgements
   const acknowledgementInfo = `## Acknowledgments

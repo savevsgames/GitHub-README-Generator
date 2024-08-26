@@ -33,9 +33,19 @@ const startingQuestion = [
   {
     type: "list",
     name: "testVersion",
-    message: "Do you want the SIMPLE template or the ADVANCED template?",
+    message: colors.yellow(
+      "Do you want the SIMPLE template or the ADVANCED template?"
+    ),
     choices: ["simple", "advanced"],
+    default: "advanced",
     waitUserInput: true,
+    validate: (userInput) => {
+      if (userInput) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
 ];
 // Questions for User Input
@@ -43,7 +53,7 @@ const questions = [
   {
     type: "input",
     name: "projectTitle",
-    message: colors.info(
+    message: colors.data(
       "Enter Project Title: \n NOTE - The title of your project should be clear and descriptive, giving readers an immediate understanding of what the project is about."
     ),
     waitUserInput: true,
@@ -59,34 +69,224 @@ const questions = [
   {
     type: "editor",
     name: "projectDescription",
-    message: colors.info(
+    message: colors.data(
+      "Enter Project Description: \n NOTE - A brief overview of the project, explaining its purpose, features, and what problems it solves. This section should engage readers and provide context."
+    ),
+    waitUserInput: true,
+    validate: (userInput) => {
+      if (userInput) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+
+  {
+    type: "editor",
+    name: "projectInstallInstructions",
+    message: colors.data(
+      "Enter Installation Instructions: \n NOTE - Detailed steps on how to install and set up the project. This should include any dependencies, configuration requirements, and troubleshooting tips. \n * - This will open an editor for you to enter instructions. Enter your instructions, then save the file and close it to return to the CLI."
+    ),
+    waitUserInput: true,
+    validate: (userInput) => {
+      if (userInput) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+
+  {
+    type: "editor",
+    name: "projectUsageInstructions",
+    message: colors.data(
+      "Enter Usage Instructions: \n NOTE - Examples of how to use the project, including code snippets and any relevant commands. This section helps users understand how to interact with your project effectively. \n * - This will open an editor for you to enter instructions. Enter your instructions, then save the file and close it to return to the CLI."
+    ),
+    waitUserInput: true,
+    validate: (userInput) => {
+      if (userInput) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+
+  {
+    type: "editor",
+    name: "projectContributingGuidelines",
+    message: colors.data(
+      "Enter Contributing Guidelines: \n NOTE - Instructions for how others can contribute to the project, including coding standards, pull request processes, and any other relevant guidelines."
+    ),
+    waitUserInput: true,
+    validate: (userInput) => {
+      if (userInput) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+
+  {
+    type: "list",
+    name: "projectLicenseInformation",
+    message: colors.data(
+      "Enter License Information: \n NOTE - Specify the license under which the project is distributed. This informs users of their rights regarding the use and modification of the project."
+    ),
+    choices: [
+      "Apache License 2.0",
+      "GNU General Public License v3.0",
+      "MIT License",
+      'BSD 2-Clause "Simplified" License',
+      'BSD 3-Clause "New" or "Revised" License',
+      "Boost Software License 1.0",
+      "Creative Commons Zero v1.0 Universal",
+      "Eclipse Public License 2.0",
+      "GNU Affero General Public License v3.0",
+      "GNU General Public License v2.0",
+      "GNU Lesser General Public License v2.1",
+      "Mozilla Public License 2.0",
+      "The Unlicense",
+      "NO SPECIFIED LICENSE",
+    ],
+    waitUserInput: true,
+    validate: (userInput) => {
+      if (userInput) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+
+  {
+    type: "editor",
+    name: "projectAcknowledgments",
+    message: colors.data(
+      "Enter Credits and Acknowledgments: \n NOTE - Recognition of contributors, libraries, or resources that were instrumental in development."
+    ),
+    waitUserInput: true,
+    validate: (userInput) => {
+      if (userInput) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+
+  {
+    type: "input",
+    name: "projectContactGithub",
+    message: colors.data("Enter your GitHub username: "),
+    waitUserInput: true,
+    validate: (userInput) => {
+      if (userInput) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+
+  {
+    type: "input",
+    name: "projectContactEmail",
+    message: colors.data("Enter your email: "),
+    waitUserInput: true,
+    validate: (userInput) => {
+      if (userInput) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+
+  {
+    type: "editor",
+    name: "projectContactAdditional",
+    message: colors.data(
+      "Enter instructions for users who wish to ask you questions: "
+    ),
+    waitUserInput: true,
+    validate: (userInput) => {
+      if (userInput) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+
+  {
+    type: "editor",
+    name: "projectResources",
+    message: colors.data(
+      "Enter Additional Resources: \n NOTE - Links to documentation, tutorials, or related projects that may help users further understand or utilize the project."
+    ),
+    waitUserInput: true,
+    validate: (userInput) => {
+      if (userInput) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+];
+// Questions for simple version
+const simpleQuestions = [
+  {
+    type: "input",
+    name: "projectTitle",
+    message: colors.data(
+      "Enter Project Title: \n NOTE - The title of your project should be clear and descriptive, giving readers an immediate understanding of what the project is about."
+    ),
+    waitUserInput: true,
+    validate: (userInput) => {
+      if (userInput) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+
+  {
+    type: "input",
+    name: "projectDescription",
+    message: colors.data(
       "Enter Project Description: \n NOTE - A brief overview of the project, explaining its purpose, features, and what problems it solves. This section should engage readers and provide context."
     ),
     waitUserInput: true,
   },
 
   {
-    type: "editor",
+    type: "input",
     name: "projectInstallInstructions",
-    message: colors.info(
+    message: colors.data(
       "Enter Installation Instructions: \n NOTE - Detailed steps on how to install and set up the project. This should include any dependencies, configuration requirements, and troubleshooting tips. \n * - This will open an editor for you to enter instructions. Enter your instructions, then save the file and close it to return to the CLI."
     ),
     waitUserInput: true,
   },
 
   {
-    type: "editor",
+    type: "input",
     name: "projectUsageInstructions",
-    message: colors.info(
+    message: colors.data(
       "Enter Usage Instructions: \n NOTE - Examples of how to use the project, including code snippets and any relevant commands. This section helps users understand how to interact with your project effectively. \n * - This will open an editor for you to enter instructions. Enter your instructions, then save the file and close it to return to the CLI."
     ),
     waitUserInput: true,
   },
 
   {
-    type: "editor",
+    type: "input",
     name: "projectContributingGuidelines",
-    message: colors.info(
+    message: colors.data(
       "Enter Contributing Guidelines: \n NOTE - Instructions for how others can contribute to the project, including coding standards, pull request processes, and any other relevant guidelines."
     ),
     waitUserInput: true,
@@ -95,127 +295,7 @@ const questions = [
   {
     type: "list",
     name: "projectLicenseInformation",
-    message: colors.info(
-      "Enter License Information: \n NOTE - Specify the license under which the project is distributed. This informs users of their rights regarding the use and modification of the project."
-    ),
-    choices: [
-      "Apache License 2.0",
-      "GNU General Public License v3.0",
-      "MIT License",
-      'BSD 2-Clause "Simplified" License',
-      'BSD 3-Clause "New" or "Revised" License',
-      "Boost Software License 1.0",
-      "Creative Commons Zero v1.0 Universal",
-      "Eclipse Public License 2.0",
-      "GNU Affero General Public License v3.0",
-      "GNU General Public License v2.0",
-      "GNU Lesser General Public License v2.1",
-      "Mozilla Public License 2.0",
-      "The Unlicense",
-      "NO SPECIFIED LICENSE",
-    ],
-    waitUserInput: true,
-  },
-
-  {
-    type: "editor",
-    name: "projectAcknowledgments",
-    message: colors.info(
-      "Enter Credits and Acknowledgments: \n NOTE - Recognition of contributors, libraries, or resources that were instrumental in development."
-    ),
-    waitUserInput: true,
-  },
-
-  {
-    type: "input",
-    name: "projectContactGithub",
-    message: colors.info("Enter your GitHub username: "),
-    waitUserInput: true,
-  },
-
-  {
-    type: "input",
-    name: "projectContactEmail",
-    message: colors.info("Enter your email: "),
-    waitUserInput: true,
-  },
-
-  {
-    type: "editor",
-    name: "projectContactAdditional",
-    message: colors.info(
-      "Enter instructions for users who wish to ask you questions: "
-    ),
-    waitUserInput: true,
-  },
-
-  {
-    type: "editor",
-    name: "projectResources",
-    message: colors.info(
-      "Enter Additional Resources: \n NOTE - Links to documentation, tutorials, or related projects that may help users further understand or utilize the project."
-    ),
-    waitUserInput: true,
-  },
-];
-// Questions for simple version
-const simpleQuestions = [
-  {
-    type: "input",
-    name: "projectTitle",
-    message: colors.info(
-      "Enter Project Title: \n NOTE - The title of your project should be clear and descriptive, giving readers an immediate understanding of what the project is about."
-    ),
-    waitUserInput: true,
-    validate: (userInput) => {
-      if (userInput) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-  },
-
-  {
-    type: "input",
-    name: "projectDescription",
-    message: colors.info(
-      "Enter Project Description: \n NOTE - A brief overview of the project, explaining its purpose, features, and what problems it solves. This section should engage readers and provide context."
-    ),
-    waitUserInput: true,
-  },
-
-  {
-    type: "input",
-    name: "projectInstallInstructions",
-    message: colors.info(
-      "Enter Installation Instructions: \n NOTE - Detailed steps on how to install and set up the project. This should include any dependencies, configuration requirements, and troubleshooting tips. \n * - This will open an editor for you to enter instructions. Enter your instructions, then save the file and close it to return to the CLI."
-    ),
-    waitUserInput: true,
-  },
-
-  {
-    type: "input",
-    name: "projectUsageInstructions",
-    message: colors.info(
-      "Enter Usage Instructions: \n NOTE - Examples of how to use the project, including code snippets and any relevant commands. This section helps users understand how to interact with your project effectively. \n * - This will open an editor for you to enter instructions. Enter your instructions, then save the file and close it to return to the CLI."
-    ),
-    waitUserInput: true,
-  },
-
-  {
-    type: "input",
-    name: "projectContributingGuidelines",
-    message: colors.info(
-      "Enter Contributing Guidelines: \n NOTE - Instructions for how others can contribute to the project, including coding standards, pull request processes, and any other relevant guidelines."
-    ),
-    waitUserInput: true,
-  },
-
-  {
-    type: "input",
-    name: "projectLicenseInformation",
-    message: colors.info(
+    message: colors.data(
       "Enter License Information: \n NOTE - Specify the license under which the project is distributed. This informs users of their rights regarding the use and modification of the project."
     ),
     choices: [
@@ -240,7 +320,7 @@ const simpleQuestions = [
   {
     type: "input",
     name: "projectAcknowledgments",
-    message: colors.info(
+    message: colors.data(
       "Enter Credits and Acknowledgments: \n NOTE - Recognition of contributors, libraries, or resources that were instrumental in development."
     ),
     waitUserInput: true,
@@ -249,21 +329,21 @@ const simpleQuestions = [
   {
     type: "input",
     name: "projectContactGithub",
-    message: colors.info("Enter your GitHub username: "),
+    message: colors.data("Enter your GitHub username: "),
     waitUserInput: true,
   },
 
   {
     type: "input",
     name: "projectContactEmail",
-    message: colors.info("Enter your email: "),
+    message: colors.data("Enter your email: "),
     waitUserInput: true,
   },
 
   {
-    type: "editor",
+    type: "input",
     name: "projectContactAdditional",
-    message: colors.info(
+    message: colors.data(
       "Enter instructions for users who wish to ask you questions: "
     ),
     waitUserInput: true,
@@ -272,7 +352,7 @@ const simpleQuestions = [
   {
     type: "input",
     name: "projectResources",
-    message: colors.info(
+    message: colors.data(
       "Enter Additional Resources: \n NOTE - Links to documentation, tutorials, or related projects that may help users further understand or utilize the project."
     ),
     waitUserInput: true,
@@ -283,8 +363,9 @@ const confirmQuestion = [
   {
     type: "confirm",
     name: "makeCustomBadges",
-    message:
-      "Do you want to make custom badges to add to your repo? (just hit enter for YES)?",
+    message: colors.yellow(
+      "Do you want to make custom badges to add to your repo? (just hit enter for YES)?"
+    ),
     default: true,
   },
 ];
@@ -294,14 +375,14 @@ const badgeQuestions = [
   {
     type: "input",
     name: "label",
-    message: colors.info("(Optional) Badge label"),
+    message: colors.data("(Optional) Badge label"),
     waitUserInput: true,
     default: "GitHub",
   },
   {
     type: "input",
     name: "message",
-    message: colors.info("(Required) Badge message"),
+    message: colors.yellow("(Required) Badge message"),
     waitUserInput: true,
     validate: (userInput) => {
       if (userInput) {
@@ -314,57 +395,67 @@ const badgeQuestions = [
   {
     type: "list",
     name: "labelColor",
-    message: colors.info("(Optional) Label color"),
+    message: colors.data("(Optional) Label color"),
     waitUserInput: true,
     default: "green",
     choices: [
-      "bgBlack",
-      "bgRed",
-      "bgGreen",
-      "bgYellow",
-      "bgBlue",
-      "bgMagenta",
-      "bgCyan",
-      "bgWhite",
-      "bgGray",
-      "bgBrightRed",
-      "bgBrightGreen",
-      "bgBrightYellow",
-      "bgBrightBlue",
-      "bgBrightMagenta",
-      "bgBrightCyan",
-      "bgBrightWhite",
+      "black",
+      "darkblue",
+      "darkcyan",
+      "darkgreen",
+      "darkorange",
+      "brown",
+      "red",
+      "orange",
+      "yellow",
+      "lightyellow",
+      "green",
+      "lime",
+      "cyan",
+      "lightblue",
+      "blue",
+      "purple",
+      "magenta",
+      "pink",
+      "beige",
+      "white",
+      "gray",
     ],
   },
   {
     type: "list",
     name: "color",
-    message: colors.info("(Optional) Message color"),
+    message: colors.data("(Optional) Message color"),
     waitUserInput: true,
     default: "white",
     choices: [
-      "bgBlack",
-      "bgRed",
-      "bgGreen",
-      "bgYellow",
-      "bgBlue",
-      "bgMagenta",
-      "bgCyan",
-      "bgWhite",
-      "bgGray",
-      "bgBrightRed",
-      "bgBrightGreen",
-      "bgBrightYellow",
-      "bgBrightBlue",
-      "bgBrightMagenta",
-      "bgBrightCyan",
-      "bgBrightWhite",
+      "black",
+      "darkblue",
+      "darkcyan",
+      "darkgreen",
+      "darkorange",
+      "brown",
+      "red",
+      "orange",
+      "yellow",
+      "lightyellow",
+      "green",
+      "lime",
+      "cyan",
+      "lightblue",
+      "blue",
+      "purple",
+      "magenta",
+      "pink",
+      "beige",
+      "white",
+      "gray",
     ],
   },
   {
     type: "list",
     name: "style",
-    message: colors.info(
+    message: colors.data(
       "(Optional) One of: 'plastic', 'flat', 'flat-square', 'for-the-badge' or 'social'"
     ),
     waitUserInput: true,
@@ -374,7 +465,9 @@ const badgeQuestions = [
   {
     type: "confirm",
     name: "makeAnotherBadge",
-    message: "Do you want to make another badge? (just hit enter for YES)?",
+    message: colors.yellow(
+      "Do you want to make another badge? (just hit enter for YES)?"
+    ),
     default: true,
   },
 ];
@@ -429,11 +522,11 @@ async function confirmMoreBadgesQuestion() {
     inquirer
       .prompt(confirmQuestion)
       .then((confirmAnswer) => {
-        console.log(
-          "Confirmation Answer: ",
-          typeof confirmAnswer,
-          confirmAnswer
-        );
+        // console.log(
+        //   "Confirmation Answer: ",
+        //   typeof confirmAnswer,
+        //   confirmAnswer
+        // );
         resolve(confirmAnswer); // Resolve the promise by completing user input
       })
       .catch((error) => {
@@ -455,26 +548,33 @@ async function promptBadgeQuestions() {
           badgeArray.push(badgeAnswers);
           if (badgeAnswers.makeAnotherBadge) {
             // instead of just writing the badge array - convert to svg first and write individual files
-            const fileName = `additional_badge_${[badgeArray.length]}.svg`;
+            const fileName = `./output/additional_badge_${[
+              badgeArray.length,
+            ]}.svg`;
             badgeFileNameArray.push(fileName);
             const svgBadge = renderBadge(badgeAnswers);
             writeToFile(fileName, svgBadge);
             promptInquirer();
           } else {
             // Do the last badge
-            const fileName = `additional_badge_${[badgeArray.length]}.svg`;
+            const fileName = `./output/additional_badge_${[
+              badgeArray.length,
+            ]}.svg`;
             badgeFileNameArray.push(fileName);
             const svgBadge = renderBadge(badgeAnswers);
             writeToFile(fileName, svgBadge);
             // Write the whole object to a file for confirmation of structure
-            writeToFile(`additional_badges.json`, JSON.stringify(badgeArray));
+            writeToFile(
+              `./output/additional_badges.json`,
+              JSON.stringify(badgeArray)
+            );
 
             function getBadgeListFileMarkdown(fileList) {
               let markdownBadgeList = "";
               // Loop through entries in badgeFile and add them to the markdownBadgeList
               for (let i = 0; i < fileList.length; i++) {
                 let badgeFile = fileList[i];
-                markdownBadgeList += `![Badge](${badgeFile}) `;
+                markdownBadgeList += ` ![Badge](${badgeFile})`;
               }
               return markdownBadgeList;
             }
@@ -565,7 +665,7 @@ async function asyncQuestionaire() {
 
 // TODO: Create a function to initialize app
 function init() {
-  console.log("Welcome to Greg Barker's GitHub CLI README maker!");
+  console.log(`Welcome to Greg Barker's GitHub CLI README maker!`.blue);
   console.log(logo.rainbow);
   // call function to prompt user
   asyncQuestionaire();
