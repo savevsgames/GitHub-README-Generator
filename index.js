@@ -653,7 +653,6 @@ async function asyncQuestionaire() {
         badgeQuestionaireResponses
       );
       console.log("Markdown generated.");
-
       console.log("Writing file...");
       await writeToFile("README.md", markdown);
       console.log("File written successfully.");

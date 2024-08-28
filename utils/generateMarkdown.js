@@ -16,10 +16,10 @@ function renderBadge(config) {
     color: config.color, // (Optional) Message color
     style: config.style, // (Optional) One of: 'plastic', 'flat', 'flat-square', 'for-the-badge' or 'social'
   };
-  console.log("Badge info before badge: ", typeof format, format);
+  // console.log("Badge info before badge: ", typeof format, format);
   try {
     const badge = makeBadge(format);
-    console.log("Badge Created -> ", typeof badge, badge);
+    // console.log("Badge Created -> ", typeof badge, badge);
     // const base64Badge = convertSvgToBase64(badge);
     // console.log("BASE64Badge Created -> ", typeof base64Badge, base64Badge);
     return badge;
