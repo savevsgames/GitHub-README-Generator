@@ -1,18 +1,21 @@
 # GitHub README Generator
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  ![Badge](./output/additional_badge_1.svg) ![Badge](./output/additional_badge_2.svg) ![Badge](./output/additional_badge_3.svg) ![Badge](./output/additional_badge_4.svg) ![Badge](./output/additional_badge_5.svg) ![Badge](./output/additional_badge_6.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) ![Badge](./output/additional_badge_1.svg) ![Badge](./output/additional_badge_2.svg) ![Badge](./output/additional_badge_3.svg) ![Badge](./output/additional_badge_4.svg) ![Badge](./output/additional_badge_5.svg) ![Badge](./output/additional_badge_6.svg)
 
 ## Table of Contents
 
-1. [Description](#description)
-2. [Installation Instructions](#installation-instructions)
-3. [Usage Instructions](#usage-instructions)
-4. [Contributing Guidelines](#contributing-guidelines)
-5. [License Information](#license-information)
-6. [Acknowledgments](#acknowledgments)
-7. [Questions](#questions)
-8. [Resources](#resources)
-  
+- [GitHub README Generator](#github-readme-generator)
+  - [Table of Contents](#table-of-contents)
+  - [Description](#description)
+  - [Installation Instructions](#installation-instructions)
+  - [Usage Instructions](#usage-instructions)
+  - [Contributing Guidelines](#contributing-guidelines)
+  - [License Information](#license-information)
+    - [MIT License](#mit-license)
+  - [Acknowledgments](#acknowledgments)
+  - [Questions](#questions)
+  - [Resources](#resources)
+
 ## Description
 
 The GitHub README Generator is a command-line application that dynamically generates a professional README.md file based on user input. This tool streamlines the process of creating comprehensive project documentation, ensuring that developers can quickly produce high-quality READMEs for their GitHub repositories.
@@ -25,15 +28,15 @@ To install the GitHub README Generator, follow these steps:
 
 1. Clone the repository to your local machine:
 
-- git clone https://github.com/savevsgames/GitHub-README-Generator.git
+   - git clone <https://github.com/savevsgames/GitHub-README-Generator.git>
 
 2. Navigate to the project directory:
 
-- cd GitHub-README-Generator
+   - cd GitHub-README-Generator
 
 3. Install the required dependencies:
 
-- npm install
+   - npm install
 
 ## Usage Instructions
 
@@ -71,15 +74,13 @@ I would like to extend my heartfelt thanks to the following:
 
 - **Colors**: For adding a splash of color to the console, making the output more visually appealing and user-friendly.
 
-- **ECMA-262**: For defining the standard that brings us JavaScript! Without it, we’d be lost in a world of syntax chaos. Remember, in the realm of programming languages, it’s not just about what you code, but how you adhere to the rules of engagement!
-
-Thank you to all the contributors and maintainers of these incredible projects. Your hard work and dedication inspire developers everywhere!
+- **ECMA-262**: For defining the standard that brings us JavaScript!
 
 ## Questions
 
 GitHub Profile: [savevsgames](https://github.com/savevsgames)
 
-Email: gregcbarker@gmail.com
+Email: <gregcbarker@gmail.com>
 
 For questions or support, please create an issue.
 
